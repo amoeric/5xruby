@@ -1,24 +1,26 @@
-# README
+# 五倍的十八銅人
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### 步驟4: 想像網站成品會是什麼樣子
 
-Things you may want to cover:
+目前想到的是建立三個model
 
-* Ruby version
+### 1. User
+PK: id:int </br>
+account: string </br>
+password: string </br>
+role: string </br>
 
-* System dependencies
+### 2. Mission
+PK: id:int </br>
+FK: user_id:int </br>
+name: string </br>
+content: text </br>
+priority: string </br>
+status: string </br>
 
-* Configuration
+### 3. Tag
+PK: id:int </br>
+FK: mission:id </br>
+type: string </br>
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![image](https://github.com/amoeric/5xruby/blob/master/%E8%9E%A2%E5%B9%95%E5%BF%AB%E7%85%A7%202019-07-08%20%E4%B8%8B%E5%8D%882.33.40.png)
