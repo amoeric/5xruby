@@ -1,6 +1,6 @@
 <h1>來新增任務吧～</h1>
 <%= link_to "返回", root_path %>
-<%= form_for @mission ,url: { action: "create" } do |mission| %>
+<%= form_for @mission, url: { action: "create" } do |mission| %>
   <%= mission.label :name %>
   <%= mission.text_field :name %>
   <%= mission.label :content %>

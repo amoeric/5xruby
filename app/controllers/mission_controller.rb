@@ -11,7 +11,7 @@ class MissionController < ApplicationController
   def create
     @mission = Mission.new(params_mission)
     if @mission.save
-      redirect_to root_path,notice:'新增任務成功！'
+      redirect_to root_path, notice: '新增任務成功！'
     else
       render :new
     end
@@ -31,9 +31,9 @@ class MissionController < ApplicationController
   end
 
   def destroy
-    @mission = Mission.find_by(id: params[:id])
+    @mission = Mission.find(params[:id])
     if @mission.destroy
-      redirect_to root_path,notice: "刪除成功"
+      redirect_to root_path, notice: "刪除成功"
     else
       render :index
     end
