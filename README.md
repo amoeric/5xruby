@@ -1,24 +1,37 @@
-# README
+# 五倍的十八銅人
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### 步驟4: 想像網站成品會是什麼樣子
 
-Things you may want to cover:
+目前想到的是建立三個model
+</br>
+## 每個使用者可以有0個以上的mission 
+### 1. User  
+PK: id:int </br>
+account: string </br>
+password: string </br>
+role: int </br>
 
-* Ruby version
+## 每個mission可以有0個以上的tag,且每個mission都只會有一個使用者
+### 2. Mission 
+PK: id:int </br>
+FK: user_id:int </br>
+name: string </br>
+content: text </br>
+priority: int </br>
+status: int </br>
+start_time: datetime </br>
+end_time: datetime </br>
+</br>
+## tag_mission （多對多的資料表）
+PK: id:int </br>
+FK: mission_id:int </br>
+FK: tag_id:int </br>
+</br>
+## 每個tag會有0個或多個mission
+### 3. Tag
+PK: id:int  </br> 
+</br>
+category:string 
+</br>
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+![image](https://github.com/amoeric/5xruby/blob/master/ER-Model.png)
