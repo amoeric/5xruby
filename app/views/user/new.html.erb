@@ -1,9 +1,0 @@
-<h1>新增使用者</h1>
-<%= link_to "返回", user_index_path %>
-<%= form_for @user, url: { action: "create" }, html: { id: "newuser" } do |user| %>
-  <%= user.label :account %>
-  <%= user.text_field :account %>
-  <%= user.label :password %>
-  <%= user.text_field :password %>
-  <%= user.submit "送出" %>
-<%end%>

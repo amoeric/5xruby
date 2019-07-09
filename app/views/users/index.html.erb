@@ -1,0 +1,9 @@
+<h1>登入頁面</h1>
+<%= link_to "新增使用者", new_user_path %>
+<% @users.each do |user| %>
+  <div class="user-content">
+    <p>使用者： <%= user.account %> </p>
+    <%= link_to  "查看任務", user_missions_path(user) %>
+    <%= link_to  "刪除使用者", user_path(user), method: 'DELETE', data: { confirm: '確認刪除？' } %>
+  </div>
+<% end %>

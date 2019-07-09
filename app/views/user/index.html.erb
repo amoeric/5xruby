@@ -1,8 +1,0 @@
-<h1>登入頁面</h1>
-<%= link_to "新增使用者", new_user_path %>
-<% @users.each do |user| %>
-  <div class="">
-    <p>使用者： <%= user.account %> </p>
-    <%= link_to  "查看任務", user_mission_index_path(user) %>
-  </div>
-<% end %>

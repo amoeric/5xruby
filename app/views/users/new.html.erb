@@ -1,0 +1,7 @@
+<h1>新增使用者</h1>
+<%= link_to "返回", users_path %>
+<%= simple_form_for @user do |user| %>
+  <%= user.input :account %>
+  <%= user.input :password %>
+  <%= user.submit "送出" %>
+<%end%>
