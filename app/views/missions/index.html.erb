@@ -1,0 +1,14 @@
+<h1><%= t("mission.home") %></h1>
+<%= link_to  t("back.new_mission"), new_user_mission_path(params[:user_id]) %>
+<%= link_to  t("back.user_list"), users_path %>
+<% @missions.each do |mission| %>
+  <div class="mission">
+    <div><%= t("mission.name") %>：<%= mission.name %></div>
+    <div><%= t("mission.content") %>：<%= mission.content %></div>
+    <div><%= t("mission.start_time") %>：<%= mission.start_time %></div>
+    <div><%= t("mission.end_time") %>：<%= mission.end_time %></div>
+    <div><%= link_to t("mission.check"), user_mission_path(params[:user_id], mission) %></div>
+    <div><%= link_to t("mission.edit"), edit_user_mission_path(params[:user_id], mission) %></div>
+    <div><%= link_to t("mission.delete"), user_mission_path(params[:user_id], mission), method:'DELETE', data: { confirm: "確認刪除？" } %></div>
+  </div>
+<% end %>

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  root "user#index"
-  resources :user do
-    resources :mission 
+  root "users#index"
+  resources :users do
+    resources :missions 
   end
 end
