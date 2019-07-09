@@ -1,7 +1,7 @@
 class MissionController < ApplicationController
 
   def index
-    @missions = Mission.limit(10)
+    @missions = Mission.where("user_id = ?", params[:user_id]).limit(10)
   end
 
   def new
@@ -11,20 +11,21 @@ class MissionController < ApplicationController
   def create
     @mission = Mission.new(params_mission)
     if @mission.save
-      redirect_to root_path, notice: '新增任務成功！'
+      redirect_to user_mission_index_path(params[:user_id]), notice: '新增任務成功！'
     else
       render :new
     end
   end
 
   def edit
+    @user = User.find(params[:user_id])
     @mission = Mission.find(params[:id])
   end
 
   def update
     @mission = Mission.find(params[:id])
     if @mission.update(params_mission)
-      redirect_to root_path, notice: "修改成功！"
+      redirect_to user_mission_index_path(params[:user_id]), notice: "修改成功！"
     else
       render :edit
     end
@@ -33,7 +34,7 @@ class MissionController < ApplicationController
   def destroy
     @mission = Mission.find(params[:id])
     if @mission.destroy
-      redirect_to root_path, notice: "刪除成功"
+      redirect_to user_mission_index_path(params[:user_id]), notice: "刪除成功"
     else
       render :index
     end
@@ -41,7 +42,7 @@ class MissionController < ApplicationController
 
   private
   def params_mission
-    params.require(:mission).permit(:name, :content)
+    params.require(:mission).permit(:name, :content, :user_id)
   end
 
 end
