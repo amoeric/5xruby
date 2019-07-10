@@ -3,7 +3,7 @@ require 'date'
 
 feature "任務管理系統" do
   scenario "可新增自己的任務" do
-    create_user(account: 'zxc123', password: '123456')
+    # create_user(account: 'zxc123', password: '123456')
     user_login(account:'zxc123')
     expect(page).to have_content '這是任務首頁'
     create_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-05-19 10:30", end_time: "2020-05-19 11:30")
