@@ -3,10 +3,11 @@ services:
 language: ruby
 before_script:
   - cp config/database.yml.travis config/database.yml
-  - chromedriver-update 73.0.3683.68
+  - bundle exec rails runner "Webdrivers::Chromedriver.update"
 rvm:
   - 2.6.0
 addons:
+  chrome: stable
   postgresql: "10"
   apt:
     packages:
