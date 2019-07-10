@@ -1,13 +1,14 @@
 <h1>這是任務首頁</h1>
 <%= link_to  "前往新增任務", new_user_mission_path(params[:user_id]) %>
 <%= link_to  "回使用者列表", users_path %>
-<% @missions.each do |mission|%>
+<% @missions.each do |mission| %>
   <div class="mission">
     <div>任務名：<%= mission.name %></div>
     <div>任務內容：<%= mission.content %></div>
     <div>開始時間：<%= mission.start_time %></div>
     <div>結束時間：<%= mission.end_time %></div>
-    <div><%= link_to "修改內容", edit_user_mission_path(params[:user_id], mission) %></div>
+    <div><%= link_to "查看任務", user_mission_path(params[:user_id], mission) %></div>
+    <div><%= link_to "修改任務", edit_user_mission_path(params[:user_id], mission) %></div>
     <div><%= link_to "刪除任務", user_mission_path(params[:user_id], mission), method:'DELETE', data: { confirm: "確認刪除？" } %></div>
   </div>
-<%end%>
+<% end %>

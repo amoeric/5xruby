@@ -1,6 +1,6 @@
 <h1>來新增任務吧～</h1>
 <%= link_to "返回", root_path %>
-<%= simple_form_for @mission, url: { action: "create" }, html: { id: "newmission" } do |mission| %>
+<%= simple_form_for @mission, url: { action: "create" }, html: { id: "new_mission" } do |mission| %>
   <%= mission.hidden_field :user_id, value: params[:user_id] %>
   <%= mission.input :name %>
   <%= mission.input :content %>

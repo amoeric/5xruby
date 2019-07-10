@@ -8,6 +8,10 @@ class MissionsController < ApplicationController
     @mission = Mission.new
   end
 
+  def show
+    @mission = Mission.where("user_id = ?", params[:user_id]).find(params[:id])
+  end
+
   def create
     @mission = Mission.new(params_mission)
     if @mission.save

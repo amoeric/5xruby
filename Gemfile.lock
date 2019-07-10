@@ -254,7 +254,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.1.0)
   byebug
-  capybara (>= 2.15)
+  capybara (~> 3.25)
   chromedriver-helper
   coffee-rails (~> 4.2)
   jbuilder (~> 2.5)
@@ -264,7 +264,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rspec-rails (~> 3.8, >= 3.8.2)
   sass-rails (~> 5.0)
-  selenium-webdriver
+  selenium-webdriver (~> 3.142, >= 3.142.3)
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
