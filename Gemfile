@@ -38,7 +38,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'travis', '~> 1.8.11.travis.1009.9'
 gem 'simple_form'
-
+gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
