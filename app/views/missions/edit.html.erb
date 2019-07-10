@@ -3,5 +3,7 @@
 <%= simple_form_for([@user, @mission]) do |mission|%>
   <%= mission.input :name %>
   <%= mission.input :content %>
+  <%= mission.input :start_time %>
+  <%= mission.input :end_time %>
   <%= mission.submit "送出" %>
 <%end%>

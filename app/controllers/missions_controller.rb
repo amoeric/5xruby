@@ -42,7 +42,7 @@ class MissionsController < ApplicationController
 
   private
   def params_mission
-    params.require(:mission).permit(:name, :content, :user_id)
+    params.require(:mission).permit(:name, :content, :user_id, :start_time, :end_time)
   end
 
 end
