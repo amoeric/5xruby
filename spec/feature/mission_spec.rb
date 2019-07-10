@@ -2,6 +2,9 @@ require 'spec_helper'
 require 'date'
 
 feature "任務管理系統" do
+  
+  
+  
   scenario "可新增自己的任務" do
     create_user(account: 'zxc123', password: '123456')
     user_login(account:'zxc123')
@@ -77,7 +80,7 @@ feature "任務管理系統" do
   end
   
   def create_user(account: , password: )
-    visit '/'
+    visit '/users'
     expect(page).to have_content '登入頁面'
     click_on '新增使用者'
     expect(page).to have_content '新增使用者'
@@ -89,7 +92,7 @@ feature "任務管理系統" do
   end
   
   def user_login(account: )
-    visit '/'
+    visit '/users'
     expect(page).to have_content '登入頁面'
     page.first('div.user-content', :text => account).click_on '查看任務'
   end

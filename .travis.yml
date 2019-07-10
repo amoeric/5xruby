@@ -3,6 +3,7 @@ services:
 language: ruby
 before_script:
   - cp config/database.yml.travis config/database.yml
+  - chromedriver-update 73.0.3683.68
 rvm:
   - 2.6.0
 addons:
