@@ -9,3 +9,5 @@ script:
 
 addons:
   postgresql: "11.3"
+  username: eric
+  password: 594233
