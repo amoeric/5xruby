@@ -11,7 +11,6 @@ before_script:
   - sudo mv -f chromedriver /usr/local/share/chromedriver
   - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
   - sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
-  - chromedriver-update 2.46
   - google-chrome --version
 before_install:
   - google-chrome --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
