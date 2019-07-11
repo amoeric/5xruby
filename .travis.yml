@@ -6,7 +6,7 @@ before_script:
   - ls -al /usr/bin/google-chrome
   - ps aux | grep chrome
 before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+  - google-chrome --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 rvm:
   - 2.6.0
 sudo: required
