@@ -3,19 +3,15 @@ services:
 language: ruby
 before_script:
   - cp config/database.yml.travis config/database.yml
-  - export DISPLAY=:99.0 && sh -e /etc/init.d/xvfb start && sleep 3
 rvm:
   - 2.6.0
 addons:
   postgresql: "10"
   chrome: stable
   apt:
-  sources:
-      - google-chrome
     packages:
-    - google-chrome-stable
-    - postgresql-10
-    - postgresql-client-10
+      - postgresql-10
+      - postgresql-client-10
 env:
   global:
     - PGPORT=5433
