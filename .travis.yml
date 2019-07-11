@@ -4,7 +4,7 @@ language: ruby
 before_script:
   - cp config/database.yml.travis config/database.yml
 before_install:
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=5566 http://localhost &
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=5678 http://localhost &
 rvm:
   - 2.6.0
 addons:
