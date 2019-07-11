@@ -1,8 +1,8 @@
-<h1>任務細節</h1>
-<%= link_to  "返回任務列表", user_missions_path(params[:user_id]) %>
+<h1><%= t("mission.detail") %></h1>
+<%= link_to t("back.mission_list"), user_missions_path(params[:user_id]) %>
 <div class="mission-show">
-    <p>任務名：<%= @mission.name %></p>
-    <p>任務內容：<%= @mission.content %></p>
-    <p>任務開始時間：<%= @mission.start_time %></p>
-    <p>任務結束時間：<%= @mission.end_time %></p>
+    <p><%= t("mission.name") %>：<%= @mission.name %></p>
+    <p><%= t("mission.content") %>：<%= @mission.content %></p>
+    <p><%= t("mission.start_time") %>：<%= @mission.start_time %></p>
+    <p><%= t("mission.end_time") %>：<%= @mission.end_time %></p>
 </div>

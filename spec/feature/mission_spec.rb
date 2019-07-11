@@ -2,16 +2,13 @@ require 'spec_helper'
 require 'date'
 
 feature "任務管理系統" do
-  
-  
-  
   scenario "可新增自己的任務" do
     create_user(account: 'zxc123', password: '123456')
     user_login(account:'zxc123')
     expect(page).to have_content '這是任務首頁'
-    create_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-05-19 10:30", end_time: "2020-05-19 11:30")
-    expect(page).to have_content '2020-05-19 10:30:00 UTC'
-    expect(page).to have_content '2020-05-19 11:30:00 UTC'
+    create_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    expect(page).to have_content '2020-04-19 10:30:00 UTC'
+    expect(page).to have_content '2020-04-19 11:30:00 UTC'
 
   end
 
@@ -21,27 +18,27 @@ feature "任務管理系統" do
     page.first('div.mission', :text => '任務二').click_on '查看任務'
     expect(page).to have_content '任務二'
     expect(page).to have_content '五倍紅寶石'
-    expect(page).to have_content '2020-05-19 10:30:00 UTC'
-    expect(page).to have_content '2020-05-19 11:30:00 UTC'
+    expect(page).to have_content '2020-04-19 10:30:00 UTC'
+    expect(page).to have_content '2020-04-19 11:30:00 UTC'
   end
 
   scenario "可修改自己的任務" do
     user_login(account:'zxc123')
     expect(page).to have_content '這是任務首頁'
-    page.first('div.mission', :text => '任務二').click_on '修改任務'
-    edit_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-02-20 10:30", end_time: "2020-02-20 11:30")
+    page.first('div.mission', :text => '任務二').click_on I18n.t("mission.edit")
+    edit_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-20 10:30", end_time: "2020-04-20 11:30")
     expect(page).to have_content '任務二'
     expect(page).to have_content '五倍紅寶石'
-    expect(page).to have_content '2020-02-20 10:30:00 UTC'
-    expect(page).to have_content '2020-02-20 11:30:00 UTC'
+    expect(page).to have_content '2020-04-20 10:30:00 UTC'
+    expect(page).to have_content '2020-04-20 11:30:00 UTC'
   end
 
   scenario "可刪除自己的任務" do
     Capybara.current_driver = :selenium_chrome
     user_login(account:'zxc123')
-    expect(page).to have_content '這是任務首頁'
+    expect(page).to have_content I18n.t("mission.home")
     accept_confirm do
-      click_on '刪除任務'
+      click_on I18n.t("mission.delete")
     end
     expect(page).to have_no_content '任務二'
     delete_user
@@ -72,16 +69,16 @@ feature "任務管理系統" do
   end
 
   def delete_user
-    click_on '回使用者列表'
-    expect(page).to have_content '登入頁面'
+    click_on I18n.t("back.user_list")
+    expect(page).to have_content I18n.t("Login page")
     accept_confirm do
-      click_on '刪除使用者'
+      click_on I18n.t("user.delete")
     end
   end
   
   def create_user(account: , password: )
     visit '/users'
-    expect(page).to have_content '登入頁面'
+    expect(page).to have_content I18n.t("Login page")
     click_on '新增使用者'
     expect(page).to have_content '新增使用者'
     fill_in 'user[account]', with: account
@@ -105,13 +102,13 @@ feature "任務管理系統" do
       fill_in 'mission[content]', with: content
       #start_time
       select convert_date(start_time)[0], :from => "mission[start_time(1i)]" #年
-      select convert_date(start_time)[1], :from => "mission[start_time(2i)]" #月
+      select "四月", :from => "mission[start_time(2i)]" #月
       select convert_date(start_time)[2], :from => "mission[start_time(3i)]" #日
       select convert_date(start_time)[3], :from => "mission[start_time(4i)]" #時
       select convert_date(start_time)[4], :from => "mission[start_time(5i)]" #分
       #end_time
       select convert_date(end_time)[0], :from => "mission[end_time(1i)]" #年
-      select convert_date(end_time)[1], :from => "mission[end_time(2i)]" #月
+      select "四月", :from => "mission[end_time(2i)]" #月
       select convert_date(end_time)[2], :from => "mission[end_time(3i)]" #日
       select convert_date(end_time)[3], :from => "mission[end_time(4i)]" #時
       select convert_date(end_time)[4], :from => "mission[end_time(5i)]" #分
@@ -126,13 +123,13 @@ feature "任務管理系統" do
       fill_in 'mission[content]', with: content
       #start_time
       select convert_date(start_time)[0], :from => "mission[start_time(1i)]" #年
-      select convert_date(start_time)[1], :from => "mission[start_time(2i)]" #月
+      select "四月", :from => "mission[start_time(2i)]" #月
       select convert_date(start_time)[2], :from => "mission[start_time(3i)]" #日
       select convert_date(start_time)[3], :from => "mission[start_time(4i)]" #時
       select convert_date(start_time)[4], :from => "mission[start_time(5i)]" #分
       #end_time
       select convert_date(end_time)[0], :from => "mission[end_time(1i)]" #年
-      select convert_date(end_time)[1], :from => "mission[end_time(2i)]" #月
+      select "四月", :from => "mission[end_time(2i)]" #月
       select convert_date(end_time)[2], :from => "mission[end_time(3i)]" #日
       select convert_date(end_time)[3], :from => "mission[end_time(4i)]" #時
       select convert_date(end_time)[4], :from => "mission[end_time(5i)]" #分
