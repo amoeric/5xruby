@@ -5,6 +5,7 @@ before_script:
   - cp config/database.yml.travis config/database.yml
 rvm:
   - 2.6.0
+sudo: required
 addons:
   postgresql: "10"
   chrome: stable
