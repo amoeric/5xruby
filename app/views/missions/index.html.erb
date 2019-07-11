@@ -9,6 +9,6 @@
     <div><%= t("mission.end_time") %>：<%= mission.end_time %></div>
     <div><%= link_to t("mission.check"), user_mission_path(params[:user_id], mission) %></div>
     <div><%= link_to t("mission.edit"), edit_user_mission_path(params[:user_id], mission) %></div>
-    <div><%= link_to t("mission.delete"), user_mission_path(params[:user_id], mission), method:'DELETE', data: { confirm: "確認刪除？" } %></div>
+    <div><%= link_to t("mission.delete"), user_mission_path(params[:user_id], mission), method:'DELETE', data: { confirm: t("confirm.delete") } %></div>
   </div>
 <% end %>
