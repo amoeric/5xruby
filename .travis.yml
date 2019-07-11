@@ -3,6 +3,7 @@ services:
 language: ruby
 before_script:
   - cp config/database.yml.travis config/database.yml
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 rvm:
   - 2.6.0
 sudo: required
