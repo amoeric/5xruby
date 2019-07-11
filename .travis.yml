@@ -3,14 +3,6 @@ services:
 language: ruby
 before_script:
   - cp config/database.yml.travis config/database.yml
-  - ls -al /usr/bin/google-chrome
-  - ps aux | grep chrome
-  - wget -N http://chromedriver.storage.googleapis.com/75.0.3770.8/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip
-  - chmod +x chromedriver
-  - sudo mv -f chromedriver /usr/local/share/chromedriver
-  - sudo ln -s /usr/local/share/chromedriver /usr/local/bin/chromedriver
-  - sudo ln -s /usr/local/share/chromedriver /usr/bin/chromedriver
   - google-chrome --version
 before_install:
   - google-chrome --no-sandbox --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
