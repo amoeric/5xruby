@@ -17,16 +17,36 @@ require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara'
+require 'capybara/rspec'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-  
-  Capybara.register_driver :chrome do |app|
-	  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
-	  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  Capybara.register_driver :headless_chrome do |app|
+
+    capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+      chromeOptions: { args: %w(headless disable-gpu) }
+    )
+    client = Selenium::WebDriver::Remote::Http::Default.new
+    client.read_timeout = 120
+    profile = Selenium::WebDriver::Chrome::Profile.new
+    profile['intl.accept_languages'] = 'en'
+    Capybara::Selenium::Driver.new(app, browser: :chrome, desired_capabilities: capabilities, http_client: client, profile: profile)
   end
-  Capybara.default_driver = :chrome 
-  Capybara.current_driver = :selenium_chrome
-  Capybara.javascript_driver = :chrome
+  
+  Capybara.configure do |config|
+    config.default_driver = :headless_chrome
+    config.javascript_driver = :headless_chrome
+    config.default_max_wait_time = 10 # seconds
+    config.default_host = "http://localhost" # localhost
+    config.server_port = 5566
+  end
+
+  # Capybara.register_driver :chrome do |app|
+	#   options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
+	#   Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+  # end
+  # Capybara.default_driver = :chrome 
+  # Capybara.current_driver = :chrome
+  # Capybara.javascript_driver = :chrome
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
