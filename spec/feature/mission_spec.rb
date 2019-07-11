@@ -4,6 +4,7 @@ require 'date'
 feature "任務管理系統" do
   scenario "可新增自己的任務" do
     create_user(account: 'zxc123', password: '123456')
+    create_user(account: 'eric', password: '123456')
     user_login(account:'zxc123')
     expect(page).to have_content I18n.t("mission.home")
     create_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
@@ -47,10 +48,9 @@ feature "任務管理系統" do
     create_mission(name: '看不到此任務', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
     user1 = User.where("account = ?", 'zxc123')
     user1_mission = Mission.where("user_id = ?",user1[0].id).where(name: "看不到此任務")
-    visit '/users'
-    user_login(account:'111111')
+    user_login(account:'eric')
     create_mission(name: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
-    user = User.where("account = ?", '111111')
+    user = User.where("account = ?", 'eric')
     mission = Mission.where("user_id = ?",user[0].id).where(name: "任務一")
     expect(page).to have_no_content user1_mission[0].name
     expect(page).to have_content mission[0].name
@@ -68,7 +68,7 @@ feature "任務管理系統" do
     expect(page.first('div.mission')).to have_content mission.last.name
     #mission div count == Mission.all.count
     page.should have_css("div.mission", :count => mission_total)
-    delete_user(account: 'zxc123')
+    delete_user!
   end
   
   scenario "可設定任務的開始及結束時間" do
@@ -92,15 +92,8 @@ feature "任務管理系統" do
   scenario "任務列表，並可依優先順序、開始時間及結束時間等進行排序" do
   end
 
-  def delete_user(account: )
-    visit '/users'
-    expect(page).to have_content I18n.t("Login page")
-    expect(page).to have_content account
-    within('div.user-content', :text => account)do
-      accept_confirm do
-        click_on I18n.t("user.delete")
-      end
-    end
+  def delete_user!
+    User.destroy_all
   end
   
   def create_user(account: , password: )
