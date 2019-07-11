@@ -38,12 +38,25 @@ feature "任務管理系統" do
     page.accept_confirm I18n.t("confirm.delete") do
       click_on I18n.t("mission.delete")
     end
-    delete_user
   end
 
   scenario "使用者登入後，只能看見自己建立的任務" do
+    user_login(account:'zxc123')
+    create_mission(name: '看不到此任務', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    visit '/users'
+    user_login(account:'111111')
+    create_mission(name: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    expect(page).to have_no_content '看不到此任務'
   end
 
+  scenario "可依照建立時間進行排序" do
+    user_login(account:'zxc123')
+    create_mission(name: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    create_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    expect(page.first('div.mission')).to have_content '任務二'
+    delete_user(account: 'zxc123')
+  end
+  
   scenario "可設定任務的開始及結束時間" do
   end
 
@@ -65,11 +78,14 @@ feature "任務管理系統" do
   scenario "任務列表，並可依優先順序、開始時間及結束時間等進行排序" do
   end
 
-  def delete_user
-    click_on I18n.t("back.user_list")
+  def delete_user(account: )
+    visit '/users'
     expect(page).to have_content I18n.t("Login page")
-    accept_confirm do
-      click_on I18n.t("user.delete")
+    expect(page).to have_content account
+    within('div.user-content', :text => account)do
+      accept_confirm do
+        click_on I18n.t("user.delete")
+      end
     end
   end
   
