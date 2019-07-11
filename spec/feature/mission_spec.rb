@@ -5,32 +5,31 @@ feature "任務管理系統" do
   scenario "可新增自己的任務" do
     create_user(account: 'zxc123', password: '123456')
     user_login(account:'zxc123')
-    expect(page).to have_content '這是任務首頁'
+    expect(page).to have_content I18n.t("mission.home")
     create_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
-    expect(page).to have_content '2020-04-19 10:30:00 UTC'
-    expect(page).to have_content '2020-04-19 11:30:00 UTC'
-
+    expect(page).to have_content '2020-04-19 10:30:00 +0800'
+    expect(page).to have_content '2020-04-19 11:30:00 +0800'
   end
 
   scenario "可查看自己的任務" do
     user_login(account:'zxc123')
-    expect(page).to have_content '這是任務首頁'
-    page.first('div.mission', :text => '任務二').click_on '查看任務'
+    expect(page).to have_content I18n.t("mission.home")
+    page.first('div.mission', :text => '任務二').click_on I18n.t("mission.check")
     expect(page).to have_content '任務二'
     expect(page).to have_content '五倍紅寶石'
-    expect(page).to have_content '2020-04-19 10:30:00 UTC'
-    expect(page).to have_content '2020-04-19 11:30:00 UTC'
+    expect(page).to have_content '2020-04-19 10:30:00 +0800'
+    expect(page).to have_content '2020-04-19 11:30:00 +0800'
   end
 
   scenario "可修改自己的任務" do
     user_login(account:'zxc123')
-    expect(page).to have_content '這是任務首頁'
+    expect(page).to have_content I18n.t("mission.home")
     page.first('div.mission', :text => '任務二').click_on I18n.t("mission.edit")
     edit_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-20 10:30", end_time: "2020-04-20 11:30")
     expect(page).to have_content '任務二'
     expect(page).to have_content '五倍紅寶石'
-    expect(page).to have_content '2020-04-20 10:30:00 UTC'
-    expect(page).to have_content '2020-04-20 11:30:00 UTC'
+    expect(page).to have_content '2020-04-20 10:30:00 +0800'
+    expect(page).to have_content '2020-04-20 11:30:00 +0800'
   end
 
   scenario "可刪除自己的任務" do
