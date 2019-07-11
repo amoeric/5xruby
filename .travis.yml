@@ -3,10 +3,12 @@ services:
 language: ruby
 before_script:
   - cp config/database.yml.travis config/database.yml
+  - wget http://chromedriver.storage.googleapis.com/2.24/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.12/bin/
+  - export CHROME_BIN=chromium-browser
 rvm:
   - 2.6.0
 addons:
-  chrome: stable
   postgresql: "10"
   apt:
     packages:
@@ -16,6 +18,7 @@ env:
   global:
     - PGPORT=5433
 script:
+  - bundle install
   - bundle exec rails db:create 
   - bundle exec rails db:migrate RAILS_ENV=test
   - bundle exec rspec
