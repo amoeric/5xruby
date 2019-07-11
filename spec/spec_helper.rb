@@ -24,7 +24,7 @@ RSpec.configure do |config|
 	  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
 	  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
   end
-  # Capybara.default_driver = :chrome 
+  Capybara.default_driver = :chrome 
   Capybara.current_driver = :selenium_chrome
   Capybara.javascript_driver = :chrome
   # rspec-expectations config goes here. You can use an alternate
