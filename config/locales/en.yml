@@ -54,3 +54,9 @@ en:
     end_time: End Time
   confirm:
     delete: DELETE ?
+  notice:
+    new_mission_success: create mission success!
+    edit_mission_success: edit mission success!
+    delete_mission_success: delete mission success！
+    new_user_success: create user success！
+    delete_user_success: delete user success！

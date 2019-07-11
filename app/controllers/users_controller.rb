@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params_user)
     if @user.save
-        redirect_to users_path, notice: '新增使用者成功！'
+        redirect_to users_path, notice: I18n.t("notice.new_user_success")
     else
         render :new
     end
@@ -19,7 +19,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     if @user.destroy
-      redirect_to users_path, notice: "使用者刪除成功！"
+      redirect_to users_path, notice: I18n.t("notice.delete_user_success")
     else
       render :index
     end
