@@ -34,10 +34,9 @@ feature "任務管理系統" do
   end
 
   scenario "可刪除自己的任務" do
-    Capybara.current_driver = :selenium_chrome
     user_login(account:'zxc123')
     expect(page).to have_content I18n.t("mission.home")
-    accept_confirm do
+    page.accept_confirm do
       click_on I18n.t("mission.delete")
     end
     expect(page).to have_no_content '任務二'

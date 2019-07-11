@@ -19,13 +19,13 @@ require 'capybara/rails'
 require 'capybara'
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-
+  
   Capybara.register_driver :chrome do |app|
 	  options = Selenium::WebDriver::Chrome::Options.new(args: %w[no-sandbox headless disable-gpu])
-
 	  Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
   end
-
+  Capybara.default_driver = :chrome 
+  Capybara.current_driver = :selenium_chrome
   Capybara.javascript_driver = :chrome
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
