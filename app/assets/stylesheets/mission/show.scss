@@ -1,0 +1,17 @@
+.mission-show{
+    width: 800px;
+    height: 100vh;
+    margin: 70px auto 0 auto;
+    border: 1px solid black;
+    padding: 10px;
+    background-color: white;
+    overflow: scroll;
+    .title{
+        font-size: 30px;
+        font-weight: normal;
+        margin: 5px 0;
+    }
+    .txt{
+        text-align: center;
+    }
+}
