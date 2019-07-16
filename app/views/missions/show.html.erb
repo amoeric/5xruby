@@ -1,7 +1,7 @@
 <h1><%= t("mission.detail") %></h1>
 <%= link_to t("back.mission_list"), user_missions_path(params[:user_id]) %>
 <div class="mission-show">
-    <p><%= t("mission.name") %>：<%= @mission.name %></p>
+    <p><%= t("mission.title") %>：<%= @mission.title %></p>
     <p><%= t("mission.content") %>：<%= @mission.content %></p>
     <p><%= t("mission.start_time") %>：<%= @mission.start_time %></p>
     <p><%= t("mission.end_time") %>：<%= @mission.end_time %></p>

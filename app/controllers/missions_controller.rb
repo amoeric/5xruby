@@ -1,5 +1,5 @@
 class MissionsController < ApplicationController
-  before_action :find_user, only: [:index, :show, :edit]
+  before_action :find_user, only: [:index, :show, :edit, :update]
   before_action :find_mission, only: [:destroy, :update, :edit]
   def index
     @missions = @user.missions.order(created_at: :desc).limit(10)
