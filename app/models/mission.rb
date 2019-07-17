@@ -5,6 +5,8 @@ class Mission < ApplicationRecord
   enum status: { waiting: 0, conduct: 1, finished: 2 }
   belongs_to :user
 
+  has_many :tag_missions
+  has_many :tags, through: :tag_missions
   private
   def end_time_better_start_time
     return if end_time.blank? || start_time.blank?

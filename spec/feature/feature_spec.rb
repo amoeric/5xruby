@@ -7,7 +7,7 @@ feature "任務管理系統" do
     create_user(account: 'eric', password: '123456')
     user_login(account:'zxc123')
     expect(page).to have_content I18n.t("mission.home")
-    create_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    create_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
     expect(page).to have_content "任務二"
     expect(page).to have_content "五倍紅寶石"
   end
@@ -26,7 +26,7 @@ feature "任務管理系統" do
     expect(page).to have_content I18n.t("mission.home")
     page.first('div.mission', :text => '任務二').click_on I18n.t("mission.edit")
     expect(page).to have_content I18n.t("mission.edit")
-    edit_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-20 10:30", end_time: "2020-04-20 11:30")
+    edit_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-20 10:30", end_time: "2020-04-20 11:30")
     expect(page).to have_content "2020-04-20 10:30:00 +0800"
     expect(page).to have_content "2020-04-20 11:30:00 +0800"
   end
@@ -42,18 +42,18 @@ feature "任務管理系統" do
 
   scenario "使用者登入後，只能看見自己建立的任務" do
     user_login(account:'zxc123')
-    create_mission(name: '看不到此任務', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    create_mission(title: '看不到此任務', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
     expect(page).to have_content "看不到此任務"
     user_login(account:'eric')
-    create_mission(name: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    create_mission(title: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
     expect(page).to have_content "任務一"
     page.should have_css("div.mission", :count => 1)
   end
 
   scenario "可依照建立時間進行排序" do
     user_login(account:'zxc123')
-    create_mission(name: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
-    create_mission(name: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    create_mission(title: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
+    create_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
     expect(page).to have_content "任務一"
     expect(page).to have_content "任務二"
     user = User.find_by_account('zxc123')
@@ -110,11 +110,11 @@ feature "任務管理系統" do
     page.first('div.user-content', :text => account).click_on '查看任務'
   end
 
-  def create_mission(name: , content: , start_time: , end_time: )
+  def create_mission(title: , content: , start_time: , end_time: )
     click_on '前往新增任務'
     expect(page).to have_content '返回'
     within '#new_mission' do
-      fill_in 'mission[name]', with: name
+      fill_in 'mission[title]', with: title
       fill_in 'mission[content]', with: content
       #start_time
       select convert_date(start_time)[0], :from => "mission[start_time(1i)]" #年
@@ -132,10 +132,10 @@ feature "任務管理系統" do
     click_on '送出'
   end
 
-  def edit_mission(name: , content: , start_time: , end_time: )
+  def edit_mission(title: , content: , start_time: , end_time: )
     expect(page).to have_content '修改任務'
     within 'form' do
-      fill_in 'mission[name]', with: name
+      fill_in 'mission[title]', with: title
       fill_in 'mission[content]', with: content
       #start_time
       select convert_date(start_time)[0], :from => "mission[start_time(1i)]" #年
