@@ -21,10 +21,15 @@ priority: int </br>
 status: int </br>
 start_time: datetime </br>
 end_time: datetime </br>
-## 每個tag都只會有一個
+</br>
+## tag_mission （多對多的資料表）
+PK: id:int </br>
+FK: mission_id:int </br>
+FK: tag_id:int </br>
+</br>
+## 每個tag會有0個或多個mission
 ### 3. Tag
-PK: id:int  </br>
-FK: mission_id:int  
+PK: id:int  </br> 
 </br>
 category:string 
 </br>
