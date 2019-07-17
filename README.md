@@ -34,4 +34,4 @@ PK: id:int  </br>
 category:string 
 </br>
 
-![image](https://github.com/amoeric/5xruby/blob/master/ER-Model%E4%BF%AE%E6%AD%A3%E7%89%88.png)
+![image](https://github.com/amoeric/5xruby/blob/master/ER-Model.png)
