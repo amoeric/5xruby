@@ -1,0 +1,66 @@
+.mission-index{
+  width: 100%;
+  margin: 60px auto;
+  padding: 10px 0;
+  height: 100%;
+  background-color: #f5f6fa;
+  display: flex;
+  .tags{
+    width: 20%;
+    height: 150vh;
+    background-color: #f5f6fa;
+    overflow: scroll;
+  }
+  .missions{
+    display: flex;
+    flex-wrap: wrap;
+    width: 70%;
+    height: 100%;
+    overflow: scroll;
+    align-content: flex-start;
+    .mission{
+      width: 100%;
+      height: 300px;
+      display: flex;
+      flex-direction: column;
+      margin: 5px;
+      border-top: 1px solid black;
+      border-left: 1px solid black;
+      border-right: 1px solid black;
+      border-bottom: 3px solid gray;
+      padding: 0 10px;
+      .mission-content{
+        height: 200px;
+        padding: 10px;
+        line-height: 50px;
+        .content{
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+        }
+      }
+      .btn{
+        width: 100%;
+        height: 100px;
+        text-align: right;
+        a{
+          text-align: center;
+          display: inline-block;
+          width: 70px;
+          height: 50px;
+          line-height: 50px;
+          text-decoration: none;
+          color: white;
+          background-color: #3cb1e7;
+        }
+        a:last-child{
+          background-color: red;
+        }
+        a:hover{
+            color: rgb(121, 123, 124);
+        }
+      }
+    }
+  }
+}

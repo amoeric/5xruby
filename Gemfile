@@ -35,7 +35,6 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'simple_form'
 gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
 
@@ -44,6 +43,11 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
   gem 'faker', '~> 1.9', '>= 1.9.6'
+  gem 'pg', '~> 1.1', '>= 1.1.4'
+end
+
+group :production do
+  gem 'pg', '~> 1.1', '>= 1.1.4'
 end
 
 group :development do
