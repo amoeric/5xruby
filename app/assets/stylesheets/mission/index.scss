@@ -1,6 +1,7 @@
 .mission-index{
   width: 100%;
-  margin: auto;
+  margin: 60px auto;
+  padding: 10px 0;
   height: 100%;
   background-color: #f5f6fa;
   display: flex;
@@ -13,8 +14,6 @@
   .missions{
     display: flex;
     flex-wrap: wrap;
-    margin-top: 60px;
-    margin-right: auto;
     width: 70%;
     height: 100%;
     overflow: scroll;
@@ -24,6 +23,8 @@
       height: 300px;
       display: flex;
       flex-direction: column;
+      margin: 5px;
+      border-top: 1px solid black;
       border-left: 1px solid black;
       border-right: 1px solid black;
       border-bottom: 3px solid gray;
@@ -32,6 +33,12 @@
         height: 200px;
         padding: 10px;
         line-height: 50px;
+        .content{
+          overflow: hidden;
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 1;
+        }
       }
       .btn{
         width: 100%;
