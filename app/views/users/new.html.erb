@@ -1,0 +1,7 @@
+<h1><%= t("user.new") %></h1>
+<%= link_to t("return"), users_path %>
+<%= simple_form_for @user do |user| %>
+  <%= user.input :account %>
+  <%= user.input :password %>
+  <%= user.submit t("submit") %>
+<% end %>

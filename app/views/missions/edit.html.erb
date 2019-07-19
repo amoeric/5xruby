@@ -1,0 +1,17 @@
+<h1><%= t("mission.edit") %></h1>
+<% if @mission.errors.any? %>
+  <ul>
+    <% @mission.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+<%= link_to t("return"), root_path %>
+<%= simple_form_for([@user, @mission]) do |mission| %>
+  <%= mission.hidden_field :user_id, value: params[:user_id] %>
+  <%= mission.input :title %>
+  <%= mission.input :content %>
+  <%= mission.input :start_time %>
+  <%= mission.input :end_time %>
+  <%= mission.submit t("submit") %>
+<% end %>

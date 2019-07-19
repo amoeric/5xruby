@@ -30,4 +30,33 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  Login page: Login Page
+  return: back
+  back:
+    mission_list: back mission list
+    user_list: back user list
+    new_mission: add mission
+  submit: Submit
+  users: User
+  user: 
+    new: New User
+    delete: Delete User
+  mission:
+    new: New Mission
+    check: Mission Check
+    edit: Edit Mission
+    delete: Delete Mission
+    home: Missions
+    detail: Mission Detail
+    name: Mission Name
+    content: Mission Content
+    start_time: Start Time
+    end_time: End Time
+  confirm:
+    delete: DELETE ?
+  notice:
+    new_mission_success: create mission success!
+    edit_mission_success: edit mission success!
+    delete_mission_success: delete mission success！
+    new_user_success: create user success！
+    delete_user_success: delete user success！

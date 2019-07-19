@@ -1,0 +1,34 @@
+"zh-TW":
+  Login page: 登入頁面
+  return: 返回
+  back:
+    mission_list: 返回任務列表
+    user_list: 回使用者列表
+    new_mission: 前往新增任務
+  submit: 送出
+  users: 使用者
+  user: 
+    new: 新增使用者
+    delete: 刪除使用者
+  mission:
+    new: 來新增任務吧
+    check: 查看任務
+    edit: 修改任務
+    delete: 刪除任務
+    home: 這是任務首頁
+    detail: 任務細節
+    title: 任務名稱
+    content: 任務內容
+    start_time: 任務開始時間
+    end_time: 任務結束時間
+  confirm:
+    delete: 確認刪除？
+  notice:
+    new_mission_success: 新增任務成功!
+    edit_mission_success: 任務修改成功！
+    delete_mission_success: 刪除成功！
+    new_user_success: 新增使用者成功！
+    delete_user_success: 使用者刪除成功！
+  message:
+    account: "這帳號已經有人使用囉"
+    timerange: "結束日期不能比開始日期早哦！"
