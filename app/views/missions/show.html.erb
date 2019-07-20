@@ -1,7 +1,3 @@
-<nav>
-  <h1><%= t("mission.detail") %></h1>
-  <%= link_to t("back.mission_list"), user_missions_path(params[:user_id]) %>
-</nav>
 <div class="mission-show">
     <div class="title"><%= t("mission.title") %>：</div><div class="txt"><%= @mission.title %></div>
     <div class="title"><%= t("mission.content") %>：</div><div class="content"><%= @mission.content %></div>

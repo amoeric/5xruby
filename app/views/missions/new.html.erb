@@ -1,15 +1,12 @@
-<nav>
-  <h1><%= t("mission.new") %></h1>
-  <%= link_to t("return"), root_path %>
-</nav>
 <% if @mission.errors.any? %>
-  <ul>
-    <% @mission.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-  </ul>
+<ul>
+  <% @mission.errors.full_messages.each do |message| %>
+  <li><%= message %></li>
+  <% end %>
+</ul>
 <% end %>
 <div class="mission-new">
+    <h1><%= t("mission.new") %></h1>
   <%= simple_form_for @mission, url: { action: "create" }, html: { id: "new_mission" } do |mission| %>
     <%= mission.hidden_field :user_id, value: params[:user_id] %>
     <%= mission.input :title %>
