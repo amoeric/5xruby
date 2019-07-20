@@ -8,7 +8,7 @@ feature "任務管理系統" do
     create_user(account: 'eric', password: '123456')
     expect(page).to have_content "eric"
     user_login(account:'zxc123')
-    expect(page).to have_content I18n.t("mission.home")
+    expect(page).to have_content I18n.t("back.new_mission")
     create_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30")
     expect(page).to have_content "任務二"
     expect(page).to have_content "五倍紅寶石"
@@ -18,7 +18,6 @@ feature "任務管理系統" do
     user_login(account:'zxc123')
     expect(page).to have_content "任務二"
     page.first('div.mission', :text => '任務二').click_on I18n.t("mission.check")
-    expect(page).to have_content I18n.t("mission.detail")
     expect(page).to have_content "任務二"
     expect(page).to have_content "五倍紅寶石"
   end
