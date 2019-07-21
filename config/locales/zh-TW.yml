@@ -2,9 +2,9 @@
   Login page: 登入頁面
   return: 返回
   back:
-    mission_list: 返回任務列表
-    user_list: 回使用者列表
-    new_mission: 前往新增任務
+    mission_list: 任務列表
+    user_list: 使用者列表
+    new_mission: 新增任務
   submit: 送出
   users: 使用者
   user: 
@@ -21,6 +21,12 @@
     content: 任務內容
     start_time: 任務開始時間
     end_time: 任務結束時間
+    empty: 目前沒有任務，新增一點任務吧
+    sort: 
+      method: 排序方法：
+      create_time: 以創建時間排序
+      end_time: 以最晚結束時間排序
+      early_end_time: 以最早結束時間排序
   confirm:
     delete: 確認刪除？
   notice:

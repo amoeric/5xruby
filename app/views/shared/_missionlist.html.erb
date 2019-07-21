@@ -1,0 +1,35 @@
+<div class="mission-index">
+  <div class="tags"></div>
+  <div class="missions">
+    <h1><%= t('mission.empty') if missions.empty? %></h1>
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <%= t('mission.sort.method') %>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <div><%= link_to  t("mission.sort.create_time"), user_missions_path, class:"dropdown-item end_time" %></div>
+        <div><%= link_to  t("mission.sort.end_time"), desc_endtime_user_missions_path(@user), class:"dropdown-item" %></div>
+        <div><%= link_to  t("mission.sort.early_end_time"), asc_endtime_user_missions_path(@user), class:"dropdown-item" %></div>
+      </div>
+    </div>
+    <% missions.each do |mission| %>
+      <div class="<%= checkendtime(mission.end_time) ? 'expired mission' : 'mission' %>">
+        <div class="mission-content">
+          <div class="mission-title"><%= t("mission.title") %>：<%= mission.title %></div>
+          <div class="content"><%= t("mission.content") %>：<%= mission.content %></div>
+          <div class="start_time"><%= t("mission.start_time") %>：<%= mission.start_time %></div>
+          <div class="end_time"><%= t("mission.end_time") %>：<%= mission.end_time %></div>
+        </div>
+        <div class="links">
+          <h4><%= '任務已過期' if checkendtime(mission.end_time) %></h4>
+          <%= link_to t("mission.check"), user_mission_path(user, mission) %>
+          <%= link_to t("mission.edit"), "#", data: {toggle: "modal", target: "#mission_modal"} %>
+          <%= link_to t("mission.delete"), user_mission_path(user, mission), method:'DELETE', data: { confirm: t("confirm.delete") } %>
+        </div>
+      </div>
+      <%= render 'shared/modal', mission: mission %>
+    <% end %>
+  </div> 
+</div>
+      
+  
