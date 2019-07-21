@@ -67,10 +67,35 @@ feature "任務管理系統" do
     expect(page.first('div.mission')).to have_content "任務二"
     #任務一、任務二、看不到此任務
     page.should have_css("div.mission", :count => 3)
-    delete_user!
   end
   
   scenario "可設定任務的開始及結束時間" do
+    user_login(account:'zxc123')
+    expect(page).to have_content I18n.t("mission.edit")
+    page.first('div.mission', :text => '任務二').click_on I18n.t("mission.edit")
+    edit_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-21 10:30", end_time: "2020-04-21 11:30")
+    expect(page).to have_content "2020-04-21 10:30:00 +0800"
+    expect(page).to have_content "2020-04-21 11:30:00 +0800"
+  end
+
+  scenario "依照任務結束時間排序desc" do
+    user_login(account:'zxc123')
+    expect(page).to have_content I18n.t("mission.sort.method")
+    click_on I18n.t("mission.sort.method")
+    expect(page).to have_content I18n.t("mission.sort.end_time")
+    click_on I18n.t("mission.sort.end_time")
+    expect(find("div.end_time", match: :first)).to have_content "2020-04-21 11:30:00 +0800"
+    expect(all("div.end_time").last).to have_content "2020-04-19 11:30:00 +0800"
+  end
+  
+  scenario "依照任務結束時間排序asc" do
+    user_login(account:'zxc123')
+    expect(page).to have_content I18n.t("mission.sort.method")
+    click_on I18n.t("mission.sort.method")
+    expect(page).to have_content I18n.t("mission.sort.end_time")
+    click_on I18n.t("mission.sort.early_end_time")
+    expect(find("div.end_time", match: :first)).to have_content "2020-04-19 11:30:00 +0800"
+    expect(all("div.end_time").last).to have_content "2020-04-21 11:30:00 +0800"
   end
 
   scenario "可設定任務的優先順序（高、中、低）" do
@@ -97,25 +122,23 @@ feature "任務管理系統" do
   
   def create_user(account: , password: )
     visit '/users'
-    expect(page).to have_content I18n.t("Login page")
-    click_on '新增使用者'
-    expect(page).to have_content '新增使用者'
+    expect(page).to have_content I18n.t("user.new")
+    click_on I18n.t("user.new")
+    expect(page).to have_content I18n.t("user.new")
     fill_in 'user[account]', with: account
     fill_in 'user[password]', with: password
     click_on '送出'
     expect(page).to have_content account
-    expect(page).to have_content '登入頁面'
   end
   
   def user_login(account: )
     visit '/users'
-    expect(page).to have_content '登入頁面'
     page.first('div.user', :text => account).click_on '查看任務'
   end
 
   def create_mission(title: , content: , start_time: , end_time: )
-    click_on '前往新增任務'
-    expect(page).to have_content '返回'
+    click_on I18n.t("back.new_mission")
+    expect(page).to have_content I18n.t("back.mission_list")
     within '#new_mission' do
       fill_in 'mission[title]', with: title
       fill_in 'mission[content]', with: content

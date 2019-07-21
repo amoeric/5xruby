@@ -2,7 +2,15 @@ class MissionsController < ApplicationController
   before_action :find_mission, only: [:destroy, :update, :edit]
 
   def index
-    @missions = @user.missions.order(created_at: :desc).limit(10)
+    @missions = @user.missions.order( created_at: :desc).limit(10)
+  end
+
+  def desc_endtime
+    @missions = @user.missions.order(end_time: :desc).limit(10)
+  end
+
+  def asc_endtime
+    @missions = @user.missions.order(end_time: :asc).limit(10)
   end
 
   def new
