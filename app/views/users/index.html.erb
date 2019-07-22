@@ -1,17 +1,16 @@
 <nav>
-  <h1><%= t("Login page") %></h1>
   <%= link_to t("user.new"), new_user_path %>
 </nav>
 <div class="user-index">
   <div class="users">
   <% @users.each do |user| %>
-      <div class="user">
-        <div class="user-content"><%= t("users") %>： <%= user.account %></div>
-        <div class="btn">
-          <%= link_to  t("mission.check"), user_missions_path(user) %>
-          <%= link_to  t("user.delete"), user_path(user), method: 'DELETE', data: { confirm:  t("confirm.delete") } %>
-        </div>
+    <div class="user">
+      <div class="user-content"><%= t("users") %>： <%= user.account %></div>
+      <div class="btn">
+        <%= link_to  t("mission.check"), user_missions_path(user) %>
+        <%= link_to  t("user.delete"), user_path(user), method: 'DELETE', data: { confirm:  t("confirm.delete") } %>
       </div>
-      <% end %>
     </div>
+  <% end %>
+  </div>
 </div>
