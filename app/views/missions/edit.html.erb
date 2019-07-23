@@ -1,17 +1,19 @@
-<% if mission.errors.any? %>
+<% if @mission.errors.any? %>
   <ul>
-    <% mission.errors.full_messages.each do |message| %>
+    <% @mission.errors.full_messages.each do |message| %>
       <li><%= message %></li>
     <% end %>
   </ul>
 <% end %>
+
 <div class="mission-edit">
-  <%= simple_form_for([@user, mission]) do |mission| %>
+  <%= simple_form_for([@user, @mission]) do |mission| %>
     <%= mission.hidden_field :user_id, value: params[:user_id] %>
     <%= mission.input :title %>
     <%= mission.input :content %>
     <%= mission.input :start_time %>
     <%= mission.input :end_time %>
+    <%= mission.input :status, as: :radio_buttons, collection: [['0', t("enum.status.waiting")], ['1', t("enum.status.conduct")], ['2', t("enum.status.finished")]], label_method: :second, value_method: :first %>
     <%= mission.submit t("submit") %>
   <% end %>
 </div>

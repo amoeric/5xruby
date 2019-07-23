@@ -1,0 +1,24 @@
+<%= search_form_for @q, url: user_missions_path(@user), id: "title_search" do |f| %>
+  <%= f.label :title_cont %>
+  <%= f.search_field :title_cont %>
+
+  <%= f.submit t("mission.search_btn") %>
+<% end %>
+
+<%= search_form_for @q, url: user_missions_path(@user), id: "status_search" do |f| %>
+  <%= f.label :status_eq, t("mission.search.status") %>
+  <%= f.select :status_eq, options_for_select([
+        [ t("enum.status.waiting"), 0],
+        [ t("enum.status.conduct"), 1],
+        [ t("enum.status.finished"), 2]
+      ]) %>
+  <%= f.submit t("mission.search.status_btn") %>
+<% end %>
+
+<%= sort_link(@q, :end_time) do %>
+  <strong><%= t("mission.sort.end_time") %></strong>
+<% end %>
+
+<%= sort_link(@q, :created_at) do %>
+  <strong><%= t("mission.sort.create_time") %></strong>
+<% end %>

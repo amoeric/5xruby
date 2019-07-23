@@ -2,17 +2,10 @@ class MissionsController < ApplicationController
   before_action :find_mission, only: [:destroy, :update, :edit]
 
   def index
-    @missions = @user.missions.order( created_at: :desc).limit(10)
+    @q = @user.missions.ransack(params[:q])
+    @missions = @q.result.limit(10)
   end
-
-  def desc_endtime
-    @missions = @user.missions.order(end_time: :desc).limit(10)
-  end
-
-  def asc_endtime
-    @missions = @user.missions.order(end_time: :asc).limit(10)
-  end
-
+  
   def new
     @mission = Mission.new
   end
@@ -51,7 +44,9 @@ class MissionsController < ApplicationController
 
   private
   def params_mission
-    params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time)
+    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status)
+    result[:status] = params[:mission][:status].to_i
+    result
   end
 
   def find_mission
