@@ -1,8 +1,10 @@
 class Mission < ApplicationRecord
+  include AASM
+
   validates :title, presence: true
   validate :end_time_better_start_time
-  enum priority: { low: 0, medium: 1, hight: 2 }
-  enum status: { waiting: 0, conduct: 1, finished: 2 }
+  enum priority: { I18n.t("enum.low").to_s => 0, I18n.t("enum.medium").to_s => 1, I18n.t("enum.hight").to_s => 2 }
+  enum status: { I18n.t("enum.waiting").to_s => 0, I18n.t("enum.conduct").to_s => 1, I18n.t("enum.finished").to_s => 2 }
   belongs_to :user
 
   has_many :tag_missions

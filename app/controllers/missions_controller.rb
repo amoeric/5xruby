@@ -4,6 +4,12 @@ class MissionsController < ApplicationController
   def index
     @missions = @user.missions.order( created_at: :desc).limit(10)
   end
+  
+  def search
+    titlevalue = '%' + params[:result] + '%'
+    values = Mission.statuses.values_at(*Array(params[:result]))
+    @missions = @user.missions.where( "status = ? OR title LIKE ?", values, titlevalue ).limit(10)
+  end
 
   def desc_endtime
     @missions = @user.missions.order(end_time: :desc).limit(10)
@@ -51,7 +57,9 @@ class MissionsController < ApplicationController
 
   private
   def params_mission
-    params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time)
+    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status)
+    result[:status] = params[:mission][:status].to_i
+    result
   end
 
   def find_mission

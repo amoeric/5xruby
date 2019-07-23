@@ -6,6 +6,9 @@ Rails.application.routes.draw do
         get :desc_endtime
         get :asc_endtime
       end
+      collection do
+        get :search
+      end
     end
     resources :tags 
   end
