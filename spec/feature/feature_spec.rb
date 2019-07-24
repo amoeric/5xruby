@@ -82,7 +82,7 @@ feature "任務管理系統" do
       click_on I18n.t("mission.sort.method")
       expect(page).to have_content I18n.t("mission.sort.end_time")
       click_on I18n.t("mission.sort.end_time")
-      expect(page.first("div.end_time")).to have_content "2020-04-21 11:30:00 +0800"
+      expect(find("div.end_time", match: :first)).to have_content "2020-04-21 11:30:00 +0800"
       expect(all("div.end_time").last).to have_content "2020-04-19 11:30:00 +0800"
     end
     
@@ -92,7 +92,7 @@ feature "任務管理系統" do
       click_on I18n.t("mission.sort.method")
       expect(page).to have_content I18n.t("mission.sort.end_time")
       click_on I18n.t("mission.sort.early_end_time")
-      expect(page.first("div.end_time")).to have_content "2020-04-19 11:30:00 +0800"
+      expect(find("div.end_time", match: :first)).to have_content "2020-04-19 11:30:00 +0800"
       expect(all("div.end_time").last).to have_content "2020-04-21 11:30:00 +0800"
     end
   end
