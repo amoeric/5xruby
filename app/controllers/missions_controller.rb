@@ -6,9 +6,7 @@ class MissionsController < ApplicationController
   end
   
   def search
-    titlevalue = '%' + params[:result] + '%'
-    values = Mission.statuses.values_at(*Array(params[:result]))
-    @missions = @user.missions.where( "status = ? OR title LIKE ?", values, titlevalue ).limit(10)
+    @missions = @user.missions.search(value: params[:result])
   end
 
   def desc_endtime

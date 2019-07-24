@@ -1,5 +1,4 @@
 class Mission < ApplicationRecord
-  include AASM
 
   validates :title, presence: true
   validate :end_time_better_start_time
@@ -9,6 +8,7 @@ class Mission < ApplicationRecord
 
   has_many :tag_missions
   has_many :tags, through: :tag_missions
+  
   private
   def end_time_better_start_time
     return if end_time.blank? || start_time.blank?
@@ -16,5 +16,11 @@ class Mission < ApplicationRecord
     if end_time < start_time
       errors.add(:end_time, I18n.t("message.timerange"))
     end
- end
+  end
+
+  def self.search(value: )
+    title = '%' + value + '%'
+    status = statuses.values_at(*Array(value))
+    where("status = ? OR title LIKE ?", status, title)
+  end
 end
