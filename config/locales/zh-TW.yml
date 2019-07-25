@@ -24,6 +24,8 @@
     empty: 目前沒有任務，新增一點任務吧
     status: 任務狀態
     search: 以標題或任務狀態查詢：
+    expired: 任務已過期
+    search_btn: 查詢
     sort: 
       method: 排序方法：
       create_time: 以創建時間排序
@@ -40,10 +42,13 @@
   message:
     account: 這帳號已經有人使用囉
     timerange: 結束日期不能比開始日期早哦！
+    search_empty: 查無此結果
   enum:
-    waiting: 待處理
-    conduct: 進行中
-    finished: 已完成
-    low: 低
-    medium: 中
-    hight: 高
+    status:
+      waiting: 待處理
+      conduct: 進行中
+      finished: 已完成
+    priority:
+      low: 低
+      medium: 中
+      hight: 高

@@ -27,7 +27,7 @@
           <div class="status"><%= t("mission.status") %>：<%= mission.status %></div>
         </div>
         <div class="links">
-          <h4><%= '任務已過期' if checkendtime(mission.end_time) %></h4>
+          <h4><%= t("mission.expired") if checkendtime(mission.end_time) %></h4>
           <%= link_to t("mission.check"), user_mission_path(user, mission) %>
           <%= link_to t("mission.edit"), edit_user_mission_path(user, mission) %>
           <%= link_to t("mission.delete"), user_mission_path(user, mission), method:'DELETE', data: { confirm: t("confirm.delete") } %>

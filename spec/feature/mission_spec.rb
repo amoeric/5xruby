@@ -6,6 +6,11 @@ RSpec.describe Mission, type: :model do
     login_user = User.create( account: "amoeric", password: "123456" ) if login_user.nil?
     login_user
   end
+  
+  let(:reset!) do
+    User.destroy_all
+    Mission.destroy_all
+  end
 
   describe "mission model 測試" do 
     let(:mission) do
@@ -28,21 +33,21 @@ RSpec.describe Mission, type: :model do
     
     context "enum測試" do
       it "priority是否有預設值" do
-        expect(mission.priority).to eq I18n.t("enum.low")
+        expect(mission.priority).to eq "低"
       end
   
       it "priority的enum是否有效" do
         mission.priority = 2
-        expect(mission.priority).to eq I18n.t("enum.hight")
+        expect(mission.priority).to eq "高"
       end
   
       it "status是否有預設值" do
-        expect(mission.status).to eq I18n.t("enum.waiting")
+        expect(mission.status).to eq "待處理"
       end
   
       it "status的enum是否有效" do
         mission.status = 2
-        expect(mission.status).to eq I18n.t("enum.finished")
+        expect(mission.status).to eq "已完成"
       end
     end
 
@@ -50,24 +55,29 @@ RSpec.describe Mission, type: :model do
       mission.end_time = "2020-05-19 10:30:00"
       mission.start_time = "2020-05-19 11:30:00"
       mission.save
-      expect(mission.errors[:end_time]).to eq [I18n.t("message.timerange")]
+      expect(mission.errors[:end_time]).to eq ["結束日期不能比開始日期早哦！"]
     end
 
     context "搜尋" do
+      let(:mission_search) do
+        Mission.create( title: "18person", content:"5xruby", user_id: user.id, status: 1, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" )
+        Mission.create( title: "18person", content:"ericisme", user_id: user.id, status: 1, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" )
+        Mission.create( title: "hellomission", content:"5xruby", user_id: user.id, status: 2, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" )
+      end
+
+      before do
+        mission_search
+      end
+       
       it "以標題搜尋" do
-        Mission.create( title: "18person", content:"5xruby", user_id: user.id )
-        Mission.create( title: "18person", content:"ericisme", user_id: user.id )
-        Mission.create( title: "hellomission", content:"5xruby", user_id: user.id)
         result = user.missions.search(value: "mission")
         expect(result.map(&:title)).to include ("hellomission")
       end
   
       it "以狀態搜尋" do
-        Mission.create( title: "18person", content:"5xruby", user_id: user.id, status: 1 )
-        Mission.create( title: "18person", content:"ericisme", user_id: user.id, status: 1 )
-        Mission.create( title: "hellomission", content:"5xruby", user_id: user.id, status: 2 )
         result = user.missions.search(value: "已完成")
         expect(result.map(&:title)).to include ("hellomission")
+        reset!
       end
     end
   end

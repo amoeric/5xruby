@@ -6,7 +6,12 @@ class MissionsController < ApplicationController
   end
   
   def search
-    @missions = @user.missions.search(value: params[:result])
+    result = @user.missions.search(value: params[:result])
+    if result.empty?
+      redirect_to user_missions_path(@user), notice: I18n.t("message.search_empty")
+    else
+      @missions = result
+    end
   end
 
   def desc_endtime
