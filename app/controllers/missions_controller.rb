@@ -2,26 +2,10 @@ class MissionsController < ApplicationController
   before_action :find_mission, only: [:destroy, :update, :edit]
 
   def index
-    @missions = @user.missions.order( created_at: :desc).limit(10)
+    @q = @user.missions.ransack(params[:q])
+    @missions = @q.result.limit(10)
   end
   
-  def search
-    result = @user.missions.search(value: params[:result])
-    if result.empty?
-      redirect_to user_missions_path(@user), notice: I18n.t("message.search_empty")
-    else
-      @missions = result
-    end
-  end
-
-  def desc_endtime
-    @missions = @user.missions.order(end_time: :desc).limit(10)
-  end
-
-  def asc_endtime
-    @missions = @user.missions.order(end_time: :asc).limit(10)
-  end
-
   def new
     @mission = Mission.new
   end

@@ -2,21 +2,9 @@
   <div class="tags"></div>
   <div class="missions">
     <h1><%= t('mission.empty') if missions.empty? %></h1>
-    <% if !missions.empty? %>
-      <div class="search">
-        <%= render 'shared/searchform' %>
-        <div class="dropdown" >
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <%= t('mission.sort.method') %>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div><%= link_to  t("mission.sort.create_time"), user_missions_path, class:"dropdown-item end_time" %></div>
-            <div><%= link_to  t("mission.sort.end_time"), desc_endtime_user_missions_path(user), class:"dropdown-item" %></div>
-            <div><%= link_to  t("mission.sort.early_end_time"), asc_endtime_user_missions_path(user), class:"dropdown-item" %></div>
-          </div>
-        </div>
-      </div>
-    <% end %>
+    <div class="search">
+      <%= render 'shared/searchform' %>  
+    </div>
     <% missions.each do |mission| %>
       <div class="<%= checkendtime(mission.end_time) ? 'expired mission' : 'mission' %>">
         <div class="mission-content">
@@ -36,5 +24,4 @@
     <% end %>
   </div> 
 </div>
-      
   

@@ -79,41 +79,24 @@ feature "任務管理系統" do
       create_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理")
       check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理")
       expect(page).to have_content "任務二"
-      first_mission = find_user.missions.order( created_at: :desc).limit(10).first
       #第一個mission 不是任務一  因為用了排序所以現在view是任務二在第一個
-      expect(first_mission.title).to eq "任務二"
+      click_on '以創建時間排序'
+      expect(page.first('div.mission')).to have_content "看不到此任務"
       expect(page.first('div.mission')).to have_no_content "任務一"
-      expect(page.first('div.mission')).to have_content "任務二"
       #任務一、任務二、看不到此任務
       page.should have_css("div.mission", :count => 3)
     end
     
     scenario "可設定任務的開始及結束時間" do
-      expect(page).to have_content "修改任務"
+      expect(page).to have_content "查詢"
       edit_mission(mission: '任務二', title: '任務二', content: '五倍紅寶石', start_time: "2020-04-21 10:30", end_time: "2020-04-21 11:30", status: "待處理")
       check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-21 10:30", end_time: "2020-04-21 11:30", status: "待處理")
       expect(page.first('div.mission', :text => "任務二")).to have_content "2020-04-21 10:30:00 +0800"
       expect(page.first('div.mission', :text => "任務二")).to have_content "2020-04-21 11:30:00 +0800"
     end
-  
-    scenario "依照任務結束時間排序desc" do
-      expect(page).to have_content "排序方法："
-      click_on "排序方法："
-      expect(page).to have_content "以最晚結束時間排序"
-      click_on "以最晚結束時間排序"
-      first_mission = find_user.missions.order(end_time: :desc).limit(10).first
-      last_mission = find_user.missions.order(end_time: :desc).limit(10).last
-      expect(first_mission.end_time).to eq Time.zone.parse("2020-04-21 11:30:00 +0800")
-      expect(last_mission.end_time).to eq Time.zone.parse("2020-04-19 11:30:00 +0800")
-      expect(find("div.end_time", match: :first)).to have_content "2020-04-21 11:30:00 +0800"
-      expect(all("div.end_time").last).to have_content "2020-04-19 11:30:00 +0800"
-    end
     
-    scenario "依照任務結束時間排序asc" do
-      expect(page).to have_content "排序方法："
-      click_on "排序方法："
-      expect(page).to have_content "以最早結束時間排序"
-      click_on "以最早結束時間排序"
+    scenario "可以依照結束時間排序" do
+      click_on '以結束時間排序'
       first_mission = find_user.missions.order(end_time: :asc).limit(10).first
       last_mission = find_user.missions.order(end_time: :asc).limit(10).last
       expect(first_mission.end_time).to eq Time.zone.parse("2020-04-19 11:30:00 +0800")
@@ -133,13 +116,13 @@ feature "任務管理系統" do
     scenario "建立時能設定狀態" do
       create_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "進行中")
       check_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "進行中")
-      expect(find("div.mission", :text => "十八銅人")).to have_content "進行中"
+      expect(find("div.mission", :text => "十八銅人")).to have_content enum_mission_status(value: "進行中")
     end
 
     scenario "能修改任務狀態" do
       edit_mission(mission: '十八銅人', title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成")
       check_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成")
-      expect(find("div.mission", :text => "十八銅人")).to have_content "已完成"
+      expect(find("div.mission", :text => "十八銅人")).to have_content enum_mission_status(value: "已完成")
     end
   end
   
@@ -151,7 +134,10 @@ feature "任務管理系統" do
     end
 
     scenario "依標題查詢" do
-      search(value: '十八銅人')
+      within '#title_search' do
+        fill_in 'q[title_cont]', with: '十八銅人'
+      end
+      click_on '查詢'
       expect(page.first("div.mission")).to have_content "十八銅人"
       expect(all("div.mission").last).to have_content "十八銅人"
     end
@@ -159,9 +145,12 @@ feature "任務管理系統" do
     scenario "依狀態查詢" do
       edit_mission(mission: '十八銅人', title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成")
       check_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成")
-      search(value: '已完成')
-      expect(page.first("div.mission")).to have_content "已完成"
-      expect(all("div.mission").last).to have_content "已完成"
+      within '#status_search' do
+        select "已完成", :from => "q[status_eq]" 
+      end
+      click_on "狀態查詢"
+      expect(page.first("div.mission")).to have_content enum_mission_status(value: "已完成")
+      expect(all("div.mission").last).to have_content enum_mission_status(value: "已完成")
       reset!
     end
   end
@@ -210,7 +199,7 @@ feature "任務管理系統" do
     expect(mission.content).to eq content
     expect(mission.start_time).to eq Time.zone.parse(start_time)
     expect(mission.end_time).to eq Time.zone.parse(end_time)
-    expect(mission.status).to eq status
+    expect(mission.status).to eq enum_mission_status(value: status)
   end
 
   def create_mission(title: , content: , start_time: , end_time: , status: )
@@ -270,13 +259,6 @@ feature "任務管理系統" do
   def convert_date(date_time )
     time = DateTime.parse(date_time)
     changed_time = time.strftime('%Y:%b:%d:%H:%M').split(':') #["2011", "May", "19", "10", "30", "14"]
-  end
-
-  def search(value: )
-    within '.search-form' do
-      fill_in 'result', with: value
-    end
-    click_on '查詢'
   end
 
   def enum_mission_status(value: )

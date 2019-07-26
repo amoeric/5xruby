@@ -21,16 +21,16 @@
     content: 任務內容
     start_time: 任務開始時間
     end_time: 任務結束時間
-    empty: 目前沒有任務，新增一點任務吧
+    empty: 沒有任務
     status: 任務狀態
-    search: 以標題或任務狀態查詢：
+    search: 
+      status: 以任務狀態查詢：
+      status_btn: 狀態查詢
     expired: 任務已過期
     search_btn: 查詢
     sort: 
-      method: 排序方法：
       create_time: 以創建時間排序
-      end_time: 以最晚結束時間排序
-      early_end_time: 以最早結束時間排序
+      end_time: 以結束時間排序
   confirm:
     delete: 確認刪除？
   notice:

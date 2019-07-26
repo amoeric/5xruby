@@ -33,21 +33,21 @@ RSpec.describe Mission, type: :model do
     
     context "enum測試" do
       it "priority是否有預設值" do
-        expect(mission.priority).to eq "低"
+        expect(mission.priority).to eq "low"
       end
   
       it "priority的enum是否有效" do
         mission.priority = 2
-        expect(mission.priority).to eq "高"
+        expect(mission.priority).to eq "hight"
       end
   
       it "status是否有預設值" do
-        expect(mission.status).to eq "待處理"
+        expect(mission.status).to eq "waiting"
       end
   
       it "status的enum是否有效" do
         mission.status = 2
-        expect(mission.status).to eq "已完成"
+        expect(mission.status).to eq "finished"
       end
     end
 
@@ -59,24 +59,24 @@ RSpec.describe Mission, type: :model do
     end
 
     context "搜尋" do
-      let(:mission_search) do
+      let(:missions) do
         Mission.create( title: "18person", content:"5xruby", user_id: user.id, status: 1, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" )
         Mission.create( title: "18person", content:"ericisme", user_id: user.id, status: 1, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" )
         Mission.create( title: "hellomission", content:"5xruby", user_id: user.id, status: 2, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" )
       end
 
       before do
-        mission_search
+        missions
       end
        
       it "以標題搜尋" do
-        result = user.missions.search(value: "mission")
-        expect(result.map(&:title)).to include ("hellomission")
+        @q = user.missions.ransack(title_cont: 'mission')
+        expect(@q.result.map(&:title)).to include ("hellomission")
       end
   
       it "以狀態搜尋" do
-        result = user.missions.search(value: "已完成")
-        expect(result.map(&:title)).to include ("hellomission")
+        @q = user.missions.ransack(status_eq: 2)
+        expect(@q.result.map(&:title)).to include ("hellomission")
         reset!
       end
     end
