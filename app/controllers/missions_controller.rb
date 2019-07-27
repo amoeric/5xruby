@@ -6,12 +6,12 @@ class MissionsController < ApplicationController
     @missions = @q.result.limit(10)
   end
   
-  def new
-    @mission = Mission.new
-  end
-
   def show
     @mission = @user.missions.find(params[:id])
+  end
+
+  def new
+    @mission = Mission.new
   end
 
   def create
@@ -44,8 +44,9 @@ class MissionsController < ApplicationController
 
   private
   def params_mission
-    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status)
+    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status, :priority)
     result[:status] = params[:mission][:status].to_i
+    result[:priority] = params[:mission][:priority].to_i
     result
   end
 

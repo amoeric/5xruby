@@ -1,10 +1,10 @@
 <div class="mission-index">
   <div class="tags"></div>
   <div class="missions">
-    <h1><%= t('mission.empty') if missions.empty? %></h1>
     <div class="search">
       <%= render 'shared/searchform' %>  
     </div>
+    <h1><%= t('mission.empty') if missions.empty? %></h1>
     <% missions.each do |mission| %>
       <div class="<%= checkendtime(mission.end_time) ? 'expired mission' : 'mission' %>">
         <div class="mission-content">
@@ -13,6 +13,7 @@
           <div class="start_time"><%= t("mission.start_time") %>：<%= mission.start_time %></div>
           <div class="end_time"><%= t("mission.end_time") %>：<%= mission.end_time %></div>
           <div class="status"><%= t("mission.status") %>：<%= mission.status %></div>
+          <div class="priority"><%= t("mission.priority") %>：<%= mission.priority %></div>
         </div>
         <div class="links">
           <h4><%= t("mission.expired") if checkendtime(mission.end_time) %></h4>
