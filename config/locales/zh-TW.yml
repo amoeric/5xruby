@@ -23,6 +23,7 @@
     end_time: 任務結束時間
     empty: 沒有任務
     status: 任務狀態
+    priority: 優先權
     search: 
       status: 以任務狀態查詢：
       status_btn: 狀態查詢
@@ -31,6 +32,7 @@
     sort: 
       create_time: 以創建時間排序
       end_time: 以結束時間排序
+      priority: 以優先權排序
   confirm:
     delete: 確認刪除？
   notice:
