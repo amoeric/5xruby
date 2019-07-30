@@ -17,6 +17,9 @@
     height: 100%;
     overflow: scroll;
     align-content: flex-start;
+    .pagination{
+      margin: auto;
+    }
     h1{
       display: block;
       width: 100%;
