@@ -21,12 +21,21 @@
     content: 任務內容
     start_time: 任務開始時間
     end_time: 任務結束時間
-    empty: 目前沒有任務，新增一點任務吧
+    empty: 沒有任務
+    status: 任務狀態
+    priority: 優先權
+    search: 
+      status: 以任務狀態查詢：
+      status_btn: 狀態查詢
+      option:
+        status: 選擇狀態
+        priority: 選擇優先權
+    expired: 任務已過期
+    search_btn: 查詢
     sort: 
-      method: 排序方法：
       create_time: 以創建時間排序
-      end_time: 以最晚結束時間排序
-      early_end_time: 以最早結束時間排序
+      end_time: 以結束時間排序
+      priority: 以優先權排序
   confirm:
     delete: 確認刪除？
   notice:
@@ -36,5 +45,15 @@
     new_user_success: 新增使用者成功！
     delete_user_success: 使用者刪除成功！
   message:
-    account: "這帳號已經有人使用囉"
-    timerange: "結束日期不能比開始日期早哦！"
+    account: 這帳號已經有人使用囉
+    timerange: 結束日期不能比開始日期早哦！
+    search_empty: 查無此結果
+  enum:
+    status:
+      waiting: 待處理
+      conduct: 進行中
+      finished: 已完成
+    priority:
+      low: 低
+      medium: 中
+      hight: 高

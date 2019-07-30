@@ -13,6 +13,8 @@
     <%= mission.input :content %>
     <%= mission.input :start_time %>
     <%= mission.input :end_time %>
+    <%= mission.input :status, as: :radio_buttons, collection: [[ 0, t("enum.status.waiting")], [ 1, t("enum.status.conduct")], [ 2, t("enum.status.finished")]], label_method: :second, value_method: :first %>
+    <%= mission.input :priority, as: :radio_buttons, collection: [[ 0, t("enum.priority.low")], [ 1, t("enum.priority.medium")], [ 2, t("enum.priority.hight")]], label_method: :second, value_method: :first %>
     <%= mission.submit t("submit") %>
-  <%end%>
+  <% end %>
 </div>
