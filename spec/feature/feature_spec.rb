@@ -2,14 +2,13 @@ require 'spec_helper'
 require 'date'
 
 feature "任務管理系統" do
-  let(:user_create) do
-    @user1 = User.create(account: 'zxc123', password: '123456')
-    @user2 = User.create(account: 'eric', password: '123456')
-  end
+  let(:user1){ User.create(account: 'zxc123', password: '123456') }
+  let(:user2){ User.create(account: 'eric', password: '123456') }
   
   before do
-    user_create
-    user_login(account:@user1.account)
+    user1
+    user2
+    user_login(account:user1.account)
   end
 
   after do
@@ -98,16 +97,16 @@ feature "任務管理系統" do
 
     scenario "可以依照結束時間排序" do
       click_on '以結束時間排序'
-      first_mission = Mission.order(end_time: :desc).limit(10).first
-      last_mission = Mission.order(end_time: :desc).limit(10).last
+      first_mission = user1.missions.order(end_time: :desc).limit(10).first
+      last_mission = user1.missions.order(end_time: :desc).limit(10).last
       expect(find("div.end_time", match: :first)).to have_content first_mission.end_time
       expect(all("div.end_time").last).to have_content last_mission.end_time
     end
     
     scenario "可以依照優先順序排序" do
       click_on '以優先權排序'
-      first_mission = Mission.order(priority: :desc).limit(10).first
-      last_mission = Mission.order(priority: :desc).limit(10).last
+      first_mission = user1.missions.order(priority: :desc).limit(10).first
+      last_mission = user1.missions.order(priority: :desc).limit(10).last
       expect(find("div.priority", match: :first)).to have_content first_mission.priority
       expect(all("div.priority").last).to have_content last_mission.priority
     end
@@ -144,16 +143,13 @@ feature "任務管理系統" do
   end
 
   context "可以任務的標題、內容進行搜尋" do
+    let(:mission_one){ create_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成", priority: "低") }
+    let(:mission_two){ create_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低") }
+    let(:mission_three){ create_mission(title: '任務三', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "高") }
     before do
-      #mission1
-      create_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成", priority: "低")
-      check_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成", priority: "低")
-      #mission2
-      create_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
-      check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
-      #mission3
-      create_mission(title: '任務三', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "高")
-      check_mission(title: '任務三', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "高")
+      mission_one
+      mission_two
+      mission_three
     end
     
     scenario "依標題查詢" do
