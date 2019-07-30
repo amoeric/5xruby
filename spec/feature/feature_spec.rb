@@ -98,16 +98,16 @@ feature "任務管理系統" do
 
     scenario "可以依照結束時間排序" do
       click_on '以結束時間排序'
-      first_mission = find_user.missions.order(end_time: :desc).limit(10).first
-      last_mission = find_user.missions.order(end_time: :desc).limit(10).last
+      first_mission = Mission.order(end_time: :desc).limit(10).first
+      last_mission = Mission.order(end_time: :desc).limit(10).last
       expect(find("div.end_time", match: :first)).to have_content first_mission.end_time
       expect(all("div.end_time").last).to have_content last_mission.end_time
     end
     
     scenario "可以依照優先順序排序" do
       click_on '以優先權排序'
-      first_mission = find_user.missions.order(priority: :desc).limit(10).first
-      last_mission = find_user.missions.order(priority: :desc).limit(10).last
+      first_mission = Mission.order(priority: :desc).limit(10).first
+      last_mission = Mission.order(priority: :desc).limit(10).last
       expect(find("div.priority", match: :first)).to have_content first_mission.priority
       expect(all("div.priority").last).to have_content last_mission.priority
     end
