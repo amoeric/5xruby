@@ -4,22 +4,31 @@
 
   <%= f.label :status_eq, t("mission.search.status") %>
   <%= f.select :status_eq, options_for_select([
-        [ "選擇狀態", "" ],
+        [ t("mission.search.option.status"), "" ],
         [ t("enum.status.waiting"), 0],
         [ t("enum.status.conduct"), 1],
         [ t("enum.status.finished"), 2]
       ]) %>
+  
+  <%= f.label :priority_eq, t("mission.search.status") %>
+  <%= f.select :priority_eq, options_for_select([
+        [ t("mission.search.option.priority"), "" ],
+        [ t("enum.priority.low"), 0],
+        [ t("enum.priority.medium"), 1],
+        [ t("enum.priority.hight"), 2]
+      ]) %>
+
   <%= f.submit t("mission.search_btn"), class: "btn btn-primary" %>
 <% end %>
 
-<%= sort_link(@q, :end_time) do %>
+<%= sort_link(@q, :end_time, default_order: :desc) do %>
   <strong><%= t("mission.sort.end_time") %></strong>
 <% end %>
 
-<%= sort_link(@q, :priority) do %>
+<%= sort_link(@q, :priority, default_order: :desc) do %>
   <strong><%= t("mission.sort.priority") %></strong>
 <% end %>
 
-<%= sort_link(@q, :created_at) do %>
+<%= sort_link(@q, :created_at, default_order: :desc) do %>
   <strong><%= t("mission.sort.create_time") %></strong>
 <% end %>
