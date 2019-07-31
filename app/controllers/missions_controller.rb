@@ -3,7 +3,7 @@ class MissionsController < ApplicationController
 
   def index
     @q = @user.missions.ransack(params[:q])
-    @missions = @q.result.limit(10)
+    @missions = @q.result.page(params[:page]).per(5)
   end
   
   def show
