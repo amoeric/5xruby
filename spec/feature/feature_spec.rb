@@ -85,7 +85,7 @@ feature "任務管理系統" do
     end
     
     scenario "可設定任務的開始及結束時間" do
-      expect(page).to have_content "查詢"
+      expect(page).to have_content "以結束時間排序"
       edit_mission(mission: '任務二', title: '任務二', content: '五倍紅寶石', start_time: "2020-04-22 10:30", end_time: "2020-04-22 11:30", status: "待處理", priority: "中")
       check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-22 10:30", end_time: "2020-04-22 11:30", status: "待處理", priority: "中")
       expect(page.first('div.mission', :text => "任務二")).to have_content "2020-04-22 10:30:00 +0800"
