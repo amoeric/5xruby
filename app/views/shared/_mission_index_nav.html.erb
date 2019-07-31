@@ -2,7 +2,11 @@
   <div class="nav-list-left">
     <%= link_to image_tag("icons8-task-64.png"), user_missions_path, class: 'nav-logo' %>
   </div>
+  <div class="nav-list-middle">
+    <%= render 'shared/searchform' %>
+  </div>
   <div class="nav-list-right">
+    <%= link_to  t("back.new_mission"), new_user_mission_path(@user) %>
     <%= link_to  t("back.user_list"), users_path %>
   </div>
 </nav>
