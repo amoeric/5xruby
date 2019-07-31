@@ -2,7 +2,11 @@
   <div class="nav-list-left">
     <%= link_to  t("back.mission_list"), user_missions_path %>
   </div>
+  <div class="nav-list-middle">
+    <%= render 'shared/searchform' %>
+  </div>
   <div class="nav-list-right">
+    <%= link_to  t("back.new_mission"), new_user_mission_path(@user) %>
     <%= link_to  t("back.user_list"), users_path %>
   </div>
 </nav>

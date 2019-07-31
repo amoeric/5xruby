@@ -16,10 +16,13 @@
  @import 'bootstrap-sprockets'; // 這行一定要在 "bootstrap 前面
  @import 'bootstrap';
  
+
+ body{
+  background-color: #03324D; 
+ }
  .wrap{
   width: 1200px;
-  margin: 70px auto auto auto;
-  background-color: #f5f6fa;
+  margin: 60px auto auto auto;
   .flash{
     font-size: 50px;
   }

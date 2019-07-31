@@ -5,6 +5,7 @@
       width: 60%;
       margin: 70px auto 0 auto;
       border: 1px solid black;
+      background-color: white;
       padding: 10px;
       div{
         width: 100%;
@@ -16,6 +17,11 @@
         input{
           width: 60%;
           height: 30px;
+        }
+        .radio_buttons{
+          .radio{
+            margin: 50px;
+          }
         }
         textarea{
           width: 60%;
