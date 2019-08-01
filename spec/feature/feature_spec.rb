@@ -2,17 +2,51 @@ require 'spec_helper'
 require 'date'
 
 feature "任務管理系統" do
-  let(:user1){ User.create(account: 'zxc123', password: '123456') }
-  let(:user2){ User.create(account: 'eric', password: '123456') }
+  let(:user1){ User.create(email: '123@example.com', password: '123456') }
+  let(:user2){ User.create(email: 'amoeric@example.com', password: '123456') }
   
   before do
     user1
     user2
-    user_login(account:user1.account)
+    user_login(email:user1.email, password: user1.password)
   end
 
   after do
     Mission.destroy_all
+    User.destroy_all
+  end
+
+  context "使用者的新增、修改" do
+    scenario "新增使用者" do
+      user_logout
+      click_on 'Sign Up'
+      within "form" do
+        fill_in 'user[email]', with: "asdf123@example.com"
+        fill_in 'user[password]', with: "123456"
+        fill_in 'user[password_confirmation]', with: "123456"
+      end
+      click_on '送出'
+      expect(page).to have_content "新增使用者成功！"
+      new_user = User.last
+      expect(new_user.email).to eq "asdf123@example.com"
+    end
+
+    scenario "修改使用者" do
+      find('.nav-list-ul').click
+      click_on '我的檔案'
+      expect(page).to have_content "更新會員資料"
+      click_on '更新會員資料'
+      before_user = User.find_by_email('123@example.com')
+      within "form" do
+        fill_in 'user[email]', with: "asdf123@example.com"
+        fill_in 'user[password]', with: "123456"
+        fill_in 'user[password_confirmation]', with: "123456"
+        click_on '送出'
+      end
+      expect(page).to have_content "更新使用者成功！"
+      after_user = User.find(before_user.id)
+      expect(after_user.email).to eq "asdf123@example.com"
+    end
   end
 
   context "任務的CRUD" do
@@ -57,7 +91,8 @@ feature "任務管理系統" do
       create_mission(title: '看不到此任務', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       check_mission(title: '看不到此任務', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       expect(page).to have_content "看不到此任務"
-      user_login(account:'eric')
+      user_logout
+      user_login(email:'amoeric@example.com' ,password: '123456')
       create_mission(title: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       check_mission(title: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       expect(page).to have_content "任務一"
@@ -186,11 +221,20 @@ feature "任務管理系統" do
   end
   
   #user相關
-  def user_login(account: )
-    visit '/users'
-    page.find('div.user', :text => account).click_on '查看任務'
+  def user_login(email: , password: )
+    visit root_path
+    within "form" do
+      fill_in 'session[email]', with: email
+      fill_in 'session[password]', with: password
+    end
+    click_on 'Log in'
   end
   
+  def user_logout
+    find('.nav-list-ul').click
+    click_on '登出'
+    expect(page).to have_content "已登出"
+  end
   #mission相關
   def check_mission(title: , content: , start_time: , end_time: , status: , priority: )
     mission = Mission.last

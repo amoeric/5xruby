@@ -1,0 +1,19 @@
+<div class="login-page">
+  <%= form_for(:session, url: login_path) do |f| %>
+
+    <div class="notice"><%= flash[:notice] %></div>  
+    <h1><%= t("Login page") %></h1>
+    
+    <%= f.label :email %>
+    <%= f.text_field :email, class: 'form-control' %>
+  
+    <%= f.label :password %>
+    <%= f.password_field :password, class: 'form-control' %>
+  
+    <%= f.submit t("user.login"), class: "btn btn-primary" %>
+  <% end %>
+  
+  <%= link_to  t("user.signup"), new_user_path, class: "sign-up" %>
+</div>
+
+        
