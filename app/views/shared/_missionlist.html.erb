@@ -16,6 +16,7 @@
         <% end %>  
       </div>
       <h1><%= t('mission.empty') if missions.empty? %></h1>
+      <p class="flash"><%= flash[:notice] %></p>
       <% missions.each do |mission| %>
         <div class="<%= checkendtime(mission.end_time) ? 'expired mission' : 'mission' %>">
           <div class="mission-content">

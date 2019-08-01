@@ -11,6 +11,7 @@
   color: aliceblue;
   h1{
     display: inline-block;
+    color: white;
   }
   a{
     display: inline-block;
@@ -45,5 +46,20 @@
   .nav-list-right{
     width: 20%;
     margin-left: auto;
+    .nav-list-ul{
+      display: inline-block;
+      list-style:none;
+      cursor: pointer;
+    }
+    li{
+      display: none;
+      background-color: #fff;
+      a{
+        color: black;
+      }
+    }
+    a{
+      vertical-align: top;
+    }
   }
 }

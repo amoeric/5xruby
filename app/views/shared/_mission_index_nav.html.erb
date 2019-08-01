@@ -7,6 +7,10 @@
   </div>
   <div class="nav-list-right">
     <%= link_to  t("back.new_mission"), new_user_mission_path(@user) %>
-    <%= link_to  t("back.user_list"), users_path %>
+    <ul class="nav-list-ul">
+      <%= "Hi,#{current_user.email}▿" %>
+      <li><%= link_to "我的檔案", user_path(@user) %></li>
+      <li><%= link_to "登出", logout_path(@user), method: 'delete' %></li>
+    </ul>
   </div>
 </nav>

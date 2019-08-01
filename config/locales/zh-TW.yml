@@ -8,8 +8,16 @@
   submit: 送出
   users: 使用者
   user: 
+    hi: Hi,
+    email: E-mail
     new: 新增使用者
     delete: 刪除使用者
+    edit: 編輯個人資料
+    update: 更新會員資料
+    profile: 我的檔案
+    logout: 登出
+    login: Log in
+    signup: Sign Up
   mission:
     new: 來新增任務吧
     check: 查看任務
@@ -43,11 +51,13 @@
     edit_mission_success: 任務修改成功！
     delete_mission_success: 刪除成功！
     new_user_success: 新增使用者成功！
+    edit_user_success: 更新使用者成功！
     delete_user_success: 使用者刪除成功！
   message:
     account: 這帳號已經有人使用囉
     timerange: 結束日期不能比開始日期早哦！
     search_empty: 查無此結果
+    again: 再輸入一次
   enum:
     status:
       waiting: 待處理
