@@ -2,8 +2,8 @@ require 'spec_helper'
 
 RSpec.describe Mission, type: :model do
   let(:user) do
-    login_user = User.find_by(account: "amoeric")
-    login_user = User.create( account: "amoeric", password: "123456" ) if login_user.nil?
+    login_user = User.find_by(email: "amoeric@example.com")
+    login_user = User.create( email: "amoeric@example.com", password: "123456" ) if login_user.nil?
     login_user
   end
 

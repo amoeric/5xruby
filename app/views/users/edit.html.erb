@@ -1,9 +1,6 @@
-<nav class="top-list">
-  <h1><%= t("user.new") %></h1>
-  <%= link_to t("return"), users_path %>
-</nav>
+<%= render 'shared/nav' %>
 <div class="user-new">
-  <%= form_for @user, controller: 'users', action: 'create' do |form| %>
+  <%= form_for @user, controller: 'users', action: 'edit' do |form| %>
     <%= render 'shared/errors', user: @user %>
     <div class="field">
       <%= form.label :email %>
@@ -20,7 +17,6 @@
       <%= form.password_field :password_confirmation %>
     </div>
     
-
     <%= form.submit t("submit") %>
   <% end %>
 </div>

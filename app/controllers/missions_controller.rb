@@ -1,7 +1,8 @@
 class MissionsController < ApplicationController
   before_action :find_mission, only: [:destroy, :update, :edit]
+  before_action :authenticate_user!
   layout "mission_index", :only => :index
-
+  
   def index
     @q = @user.missions.ransack(params[:q])
     @missions = @q.result.page(params[:page]).per(5)

@@ -72,17 +72,25 @@ h1{
   display: flex;
   justify-content: center;
   padding: 10px 0;
+  color: white;
   form{
     width: 800px;
     height: 600px;
-    border: 1px solid black;
+    background-color: #fff;
+    color: black;
     text-align: center;
     padding: 10px 0;
-    div{
+    ul{
+      list-style: none;
+    }
+    li{
+      list-style: none;
+    }
+    .field{
       width: 100%;
-      margin: 20px;
       input{
         font-size: 22px;
+        color: black;
       }
       label{
         margin: 20px;
@@ -98,5 +106,23 @@ h1{
       margin: 100px auto 0 auto;
     }
   }
+}
+
+.user-show{
+  margin: 70px auto 0 auto;
+  width: 50%;
+  height: 500px;
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  background-color: #fff;
+  color: black;
+  font-size: 20px;
+  p{
+    text-align: center;
+    width: 100%;
+  }
+
 }
         
