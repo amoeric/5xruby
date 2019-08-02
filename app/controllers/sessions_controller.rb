@@ -1,4 +1,4 @@
-class SessionsController < ApplicationController
+class SessionsController < VerificationController
 
   def new
     redirect_to user_missions_path(current_user.id) if (user_signed_in?)

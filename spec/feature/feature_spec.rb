@@ -60,7 +60,7 @@ feature "任務管理系統" do
       create_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       expect(page).to have_content "任務二"
-      page.first('div.mission', :text => '任務二').click_on I18n.t("mission.check")
+      page.first('div.mission', :text => '任務二').click_on "查看任務"
       expect(page).to have_content "任務二"
       expect(page).to have_content "五倍紅寶石"
     end
@@ -247,8 +247,8 @@ feature "任務管理系統" do
   end
 
   def create_mission(title: , content: , start_time: , end_time: , status: , priority: )
-    click_on I18n.t("back.new_mission")
-    expect(page).to have_content I18n.t("back.mission_list")
+    click_on "新增任務"
+    expect(page).to have_content "任務列表"
     within '#new_mission' do
       fill_in 'mission[title]', with: title
       fill_in 'mission[content]', with: content
@@ -271,7 +271,7 @@ feature "任務管理系統" do
   end
 
   def edit_mission(mission: , title: , content: , start_time: , end_time: , status: , priority: )
-    page.first('div.mission', :text => mission).click_on I18n.t("mission.edit")
+    page.first('div.mission', :text => mission).click_on "修改任務"
     expect(find_field('mission[title]').value).to eq mission
     within 'form' do
       fill_in 'mission[title]', with: title
