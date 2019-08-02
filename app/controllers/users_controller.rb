@@ -5,7 +5,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(current_user.id)
   end
 
   def new
@@ -23,11 +22,9 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(current_user.id)
   end
   
   def update
-    @user = User.find(current_user.id)
     if @user.update(params_user)
       login(@user)
       redirect_to user_missions_path(@user), notice: I18n.t("notice.edit_user_success")
@@ -37,7 +34,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
     if @user.destroy
       redirect_to users_path, notice: I18n.t("notice.delete_user_success")
     else
