@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class UsersController < VerificationController
   before_action :authenticate_user!, only: [:edit, :update]
   
   def index

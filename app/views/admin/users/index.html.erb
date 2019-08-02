@@ -1,0 +1,18 @@
+
+<div class="admin-users">
+  <% @users.each do |user| %>
+    <div class="user">
+      <div class="user-content">
+        <p><%= t("users") %>： <%= user.email %></p>
+        <p><%= t("user.mission_count") %>： <%= user.missions.count %></p>
+      </div>
+      <div class="btn">
+        <%= link_to  t("mission.check"), admin_user_missions_path(user) %>
+        <%= link_to  t("user.edit"), edit_admin_user_path(user) %>
+        <%= link_to  t("user.delete"), admin_user_path(user), method: 'DELETE', data: { confirm:  t("confirm.delete") } %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+

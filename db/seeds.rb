@@ -1,7 +1,7 @@
 
 
 1.times{
-  user = User.create( email: "123@example.com", password: 123456 )
+  user = User.create( email: "xeriok02390@example.com", password: "123456" )
   100.times{
     p "------------------------"
     title = Faker::Artist.name
