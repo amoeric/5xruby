@@ -1,5 +1,5 @@
 <%= search_form_for @q, url: user_missions_path(@user), id: "title_search" do |f| %>
-  <%= f.search_field :title_cont, placeholder: "搜尋標題" %>
+  <%= f.search_field :title_cont, placeholder: t("placeholder.title_search") %>
 
   <%= f.select :status_eq, options_for_select([
         [ t("mission.search.option.status"), "" ],

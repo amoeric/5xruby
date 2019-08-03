@@ -6,11 +6,11 @@ class Admin::MissionsController < ApplicationController
     if params[:user_id]
       find_user
       @q = @user.missions.ransack(params[:q])
-      @missions = @q.result.page(params[:page]).per(10)
     else
       @q = Mission.ransack(params[:q])
-      @missions = @q.result.page(params[:page]).per(10)
     end
+
+    @missions = @q.result.page(params[:page]).per(10)
   end
 
   def show
@@ -55,7 +55,7 @@ class Admin::MissionsController < ApplicationController
     if params[:user_id]
       redirect_to admin_user_missions_path(params[:user_id]), notice: I18n.t("notice.edit_mission_success")
     else
-      redirect_to admin_missions_path, notice: I18n.t("notice.delete_mission_success")
+      redirect_to admin_missions_path, notice: I18n.t("notice.edit_mission_success")
     end
   end
 

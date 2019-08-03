@@ -1,14 +1,16 @@
 "zh-TW":
   Login page: 登入頁面
   return: 返回
-  back:
+  nav:
     mission_list: 任務列表
     user_list: 使用者列表
     new_mission: 新增任務
   submit: 送出
   admin: 
     home: 管理者首頁
-    mission_list: 任務列表
+    user_list: 查看所有使用者
+    mission_list: 查看所有任務
+
   users: 使用者
   user: 
     hi: Hi,
@@ -72,3 +74,5 @@
       low: 低
       medium: 中
       hight: 高
+  placeholder: 
+    title_search: 搜尋標題

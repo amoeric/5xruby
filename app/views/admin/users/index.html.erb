@@ -1,10 +1,9 @@
-
 <div class="admin-users">
   <% @users.each do |user| %>
     <div class="user">
       <div class="user-content">
         <p><%= t("users") %>： <%= user.email %></p>
-        <p><%= t("user.mission_count") %>： <%= user.missions.count %></p>
+        <p><%= t("user.mission_count") %>： <%= user.missions.size %></p>
       </div>
       <div class="btn">
         <%= link_to  t("mission.check"), admin_user_missions_path(user) %>
