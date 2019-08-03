@@ -4,7 +4,17 @@ Rails.application.routes.draw do
     resources :missions 
     resources :tags 
   end
-  get    '/login',   to: 'sessions#new'
-  post   '/login',   to: 'sessions#create'
-  delete '/logout',  to: 'sessions#destroy'
+
+  namespace :admin do
+    root 'pages#index'
+    resources :missions 
+    resources :users do
+      resources :missions 
+      resources :tags 
+    end
+  end
+
+  get    '/login', to: 'sessions#new'
+  post   '/login', to: 'sessions#create'
+  delete '/logout', to: 'sessions#destroy'
 end

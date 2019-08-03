@@ -1,0 +1,18 @@
+.admin-wrap{
+  display: flex;
+  .admin-page{
+    width: 90%;
+    height: 500px;
+    background-color: #fff;
+    color: black;
+    margin: auto;
+    display: flex;
+    text-align: center;
+    align-content: center;
+    flex-wrap: wrap;
+    font-size: 30px;
+    .link{
+      width: 100%;
+    }
+  }
+}

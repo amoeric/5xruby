@@ -1,4 +1,4 @@
-class MissionsController < ApplicationController
+class MissionsController < VerificationController
   before_action :find_mission, only: [:destroy, :update, :edit]
   before_action :authenticate_user!
   layout "mission_index", :only => :index
