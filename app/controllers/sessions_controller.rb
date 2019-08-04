@@ -1,4 +1,4 @@
-class SessionsController < VerificationController
+class SessionsController < ApplicationController
   before_action :user_sign_in?, only: :new
 
   def new

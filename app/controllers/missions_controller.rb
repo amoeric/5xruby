@@ -1,4 +1,4 @@
-class MissionsController < VerificationController
+class MissionsController < ApplicationController
   before_action :find_mission, only: [:destroy, :update, :edit]
   before_action :find_user, only: [:index, :show]
   before_action :authenticate_user!

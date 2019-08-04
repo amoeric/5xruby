@@ -1,4 +1,4 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < Admin::PagesController
   before_action :find_user, only: [:edit, :update, :destroy]
 
   def index

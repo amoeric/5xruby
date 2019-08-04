@@ -1,4 +1,4 @@
-class UsersController < VerificationController
+class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :find_user, except: [:index, :new, :create]
   

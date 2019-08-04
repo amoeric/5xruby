@@ -9,7 +9,6 @@ module SessionHelper
         #刪除使用者導致session[:user_id]還是存在時
         session[:user_id] = nil
         @current_user = nil
-        return false 
       else
         @current_user ||= User.find_by(id: session[:user_id])
       end
@@ -17,10 +16,10 @@ module SessionHelper
   end
 
   def user_sign_in?
-    redirect_to user_missions_path(@current_user) if current_user
+    redirect_to user_missions_path(current_user) if current_user
   end
 
   def authenticate_user!
-    redirect_to root_path, notice: I18n.t("notice.login_first") if !current_user
+    redirect_to root_path, notice: I18n.t("notice.login_first") if current_user.blank?
   end
 end
