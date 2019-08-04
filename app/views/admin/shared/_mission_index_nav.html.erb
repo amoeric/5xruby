@@ -6,6 +6,14 @@
   <div class="nav-list-middle">
     <%= render 'admin/shared/search' %>
   </div>
-  <div class="nav-list-right"></div>
+  <div class="nav-list-right">
+    <%= link_to  t("nav.new_mission"), new_user_mission_path(@user) if @user %>
+    <ul class="nav-list-ul">
+      <%= "Hi,#{current_user.email}▿" %>
+      <li><%= link_to t("user.profile"), user_path(current_user) %></li>
+      <li><%= link_to t("user.logout"), logout_path(current_user), method: 'delete' %></li>
+      <li><%= link_to t("nav.user_model"), user_missions_path(current_user) %></li>
+    </ul>
+  </div>
 </nav>
 

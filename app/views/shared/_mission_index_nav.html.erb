@@ -6,11 +6,12 @@
     <%= render 'shared/searchform' %>
   </div>
   <div class="nav-list-right">
-    <%= link_to  t("nav.new_mission"), new_user_mission_path(@user) %>
+    <%= link_to  t("nav.new_mission"), new_user_mission_path(current_user) %>
     <ul class="nav-list-ul">
       <%= "Hi,#{current_user.email}▿" %>
-      <li><%= link_to t("user.profile"), user_path(@user) %></li>
-      <li><%= link_to t("user.logout"), logout_path(@user), method: 'delete' %></li>
+      <li><%= link_to t("user.profile"), user_path(current_user) %></li>
+      <li><%= link_to t("user.logout"), logout_path(current_user), method: 'delete' %></li>
+      <li><%= link_to t("admin.home"), admin_root_path if current_user.admin? %></li>
     </ul>
   </div>
 </nav>

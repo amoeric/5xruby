@@ -38,14 +38,14 @@ feature "任務管理系統" do
       click_on '更新會員資料'
       before_user = User.find_by_email('123@example.com')
       within "form" do
-        fill_in 'user[email]', with: "asdf123@example.com"
+        fill_in 'user[email]', with: "xeriok02390@example.com"
         fill_in 'user[password]', with: "123456"
         fill_in 'user[password_confirmation]', with: "123456"
         click_on '送出'
       end
       expect(page).to have_content "更新使用者成功！"
       after_user = User.find(before_user.id)
-      expect(after_user.email).to eq "asdf123@example.com"
+      expect(after_user.email).to eq "xeriok02390@example.com"
     end
   end
 

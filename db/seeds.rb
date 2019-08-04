@@ -1,6 +1,6 @@
 1.times{
   user = User.create( email: "xeriok02390@example.com", password: "123456" )
-  100.times{
+  30.times{
     p "------------------------"
     title = Faker::Artist.name
     content = Faker::Lorem.paragraph_by_chars(256, false)
@@ -11,7 +11,7 @@
 }
 
 1.times{
-  user = User.create( email: "123@example.com", password: "123456" )
+  user = User.create( email: "admin@example.com", password: "123456", role: 1 )
   50.times{
     p "------------------------"
     title = Faker::Artist.name

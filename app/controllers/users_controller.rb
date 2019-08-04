@@ -1,5 +1,6 @@
-class UsersController < VerificationController
+class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
+  before_action :find_user, except: [:index, :new, :create]
   
   def index
   end
@@ -44,5 +45,9 @@ class UsersController < VerificationController
   private
   def params_user
     params.require(:user).permit(:email, :password, :role, :password_confirmation)
+  end
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end
