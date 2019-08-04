@@ -4,6 +4,7 @@
       <div class="user-content">
         <p><%= t("users") %>： <%= user.email %></p>
         <p><%= t("user.mission_count") %>： <%= user.missions.size %></p>
+        <p><%= t("user.authority") %>： <%= user.role %></p>
       </div>
       <div class="btn">
         <%= link_to  t("mission.check"), admin_user_missions_path(user) %>

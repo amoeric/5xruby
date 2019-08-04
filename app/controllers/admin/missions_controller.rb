@@ -1,4 +1,4 @@
-class Admin::MissionsController < ApplicationController
+class Admin::MissionsController < Admin::PagesController
   before_action :find_mission, only: [:destroy, :edit, :update]
   
   def index
