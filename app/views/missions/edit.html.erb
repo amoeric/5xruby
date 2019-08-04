@@ -8,7 +8,7 @@
 <% end %>
 
 <div class="mission-edit">
-  <%= simple_form_for([@user, @mission]) do |mission| %>
+  <%= simple_form_for([current_user, @mission]) do |mission| %>
     <%= mission.hidden_field :user_id, value: params[:user_id] %>
     <%= mission.input :title %>
     <%= mission.input :content %>

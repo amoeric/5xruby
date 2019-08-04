@@ -1,5 +1,6 @@
 class MissionsController < VerificationController
   before_action :find_mission, only: [:destroy, :update, :edit]
+  before_action :find_user, only: [:index, :show]
   before_action :authenticate_user!
   layout "mission_index", :only => :index
   
@@ -54,5 +55,9 @@ class MissionsController < VerificationController
 
   def find_mission
     @mission = Mission.find(params[:id])
+  end
+
+  def find_user
+    @user = User.find(params[:user_id])
   end
 end

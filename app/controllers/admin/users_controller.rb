@@ -21,7 +21,7 @@ class Admin::UsersController < ApplicationController
       @user.missions.destroy_all
       redirect_to admin_users_path, notice: I18n.t("notice.delete_user_success")
     else
-      render :index
+      redirect_to admin_users_path, notice: I18n.t("notice.user_destroy_error")
     end
   end
 

@@ -5,12 +5,13 @@
     mission_list: 任務列表
     user_list: 使用者列表
     new_mission: 新增任務
+    user_model: 使用者模式
+    admin_model: 管理者模式
   submit: 送出
   admin: 
     home: 管理者首頁
     user_list: 查看所有使用者
     mission_list: 查看所有任務
-
   users: 使用者
   user: 
     hi: Hi,
@@ -24,12 +25,13 @@
     login: Log in
     signup: Sign Up
     mission_count: 任務數量
+    authority: 使用者權限
   mission:
     new: 來新增任務吧
     check: 查看任務
     edit: 修改任務
     delete: 刪除任務
-    home: 這是任務首頁
+    home: 任務首頁
     detail: 任務細節
     title: 任務名稱
     content: 任務內容
@@ -60,6 +62,12 @@
     edit_user_success: 更新使用者成功！
     delete_user_success: 使用者刪除成功！
     login_first: 請先登入
+    authority_not_enough: 權限不足
+    not_found_user: 找不到使用者
+    login_success: 登入成功！
+    login_error: 帳號密碼錯誤
+    logout_success: 已登出
+    user_destroy_error: 刪除使用者失敗，管理員必須有一個
   message:
     account: 這帳號已經有人使用囉
     timerange: 結束日期不能比開始日期早哦！

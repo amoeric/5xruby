@@ -5,4 +5,20 @@ class User < ApplicationRecord
   validates_length_of :password, :within => 6..15
   enum role: { user: 0, admin: 1 }
   has_many :missions
+  
+  before_destroy :admin_must_has_one
+  
+  
+  def admin?
+    role == "admin"
+  end
+
+  private
+  def admin_must_has_one
+    # if "比對刪除的是否是管理員，再去判斷是否勝一個"
+    if self.role == "admin" && User.roles.select{|key , value| value == 1 }.count == 1
+      errors[:role] << "管理員至少要存在一個"
+      throw :abort 
+    end
+  end
 end

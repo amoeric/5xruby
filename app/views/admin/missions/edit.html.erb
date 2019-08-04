@@ -1,6 +1,7 @@
 <%= render 'admin/shared/nav' %>
 <div class="admin-edit-mission-wrap">
   <div class="admin-edit-mission">
+    <%= render 'shared/errors', user: @mission %>
     <%= simple_form_for @mission, url: admin_mission_path, method: :patch do |mission| %>
       <%= mission.input :title %>
       <%= mission.input :content %>

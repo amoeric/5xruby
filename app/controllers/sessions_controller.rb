@@ -1,7 +1,8 @@
 class SessionsController < VerificationController
+  before_action :user_sign_in?, only: :new
 
   def new
-    redirect_to user_missions_path(current_user.id) if (user_signed_in?)
+    # byebug
   end
 
   def create
@@ -9,15 +10,15 @@ class SessionsController < VerificationController
     if user && user.authenticate( params[:session][:password] )
       #session[:user_id]
       login(user)
-      redirect_to user_missions_path(user), notice: "登入成功！"
+      redirect_to user_missions_path(user), notice: I18n.t("notice.login_success")
     else
-      flash[:notice] = "帳號密碼錯誤"
+      flash[:notice] = I18n.t("notice.login_error")
       render :new
     end
   end
 
   def destroy
     session[:user_id] = nil
-    redirect_to root_path, notice: "已登出"
+    redirect_to root_path, notice: I18n.t("notice.logout_success")
   end
 end
