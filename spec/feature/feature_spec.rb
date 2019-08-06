@@ -12,7 +12,9 @@ feature "任務管理系統" do
   end
 
   after do
+    TagMission.destroy_all
     Mission.destroy_all
+    Tag.destroy_all
     User.destroy_all
   end
 
@@ -189,7 +191,7 @@ feature "任務管理系統" do
     
     scenario "依標題查詢" do
       within '#title_search' do
-        fill_in 'q[title_cont]', with: '十八銅人'
+        fill_in 'q[title_or_content_or_tags_category_cont]', with: '十八銅人'
       end
       click_on '查詢'
       expect(page.first("div.mission")).to have_content "十八銅人"
@@ -215,9 +217,26 @@ feature "任務管理系統" do
     end
   end
   
-  
+  context "標籤" do
+    let(:mission_tag1){create_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成", priority: "低", tag: "my_tag")}
+    
+    before do
+      mission_tag1
+    end
 
-  scenario "可為任務加上分類標籤" do
+    scenario "可為任務加上分類標籤" do  
+      last_mission_tags = Tag.last.missions
+      expect(page).to have_content last_mission_tags[0].title
+    end
+
+    scenario "可用標籤查詢" do
+      within '#title_search' do
+        fill_in 'q[title_or_content_or_tags_category_cont]', with: "my_tag"
+      end
+      click_on '查詢'
+      last_mission_tags = Tag.last.missions
+      expect(page).to have_content last_mission_tags[0].title
+    end
   end
   
   #user相關
@@ -246,9 +265,18 @@ feature "任務管理系統" do
     expect(mission.priority).to eq enum_mission(value: priority)
   end
 
-  def create_mission(title: , content: , start_time: , end_time: , status: , priority: )
+  def create_mission(title: , content: , start_time: , end_time: , status: , priority: , tag: 0)
     click_on "新增任務"
     expect(page).to have_content "任務列表"
+    if tag != 0
+      click_on "新增標籤"
+      within "#new_tag" do
+        fill_in "tag[category]", with: tag
+      end
+      click_on '新增Tag'
+      find(".collection_check_boxes", text: tag).click
+    end
+    
     within '#new_mission' do
       fill_in 'mission[title]', with: title
       fill_in 'mission[content]', with: content

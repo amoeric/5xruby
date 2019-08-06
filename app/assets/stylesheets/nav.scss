@@ -30,16 +30,15 @@
     width: 50%;
     form{ 
       input{
-        height: 30px;
-      }
-      select{
-        color: black;
-      }
-      #q_title_cont{
         color: white;
         border-radius: 4px;
         border: none;
         background-color: #0a5988;
+        height: 30px;
+        padding-left: 10px;
+      }
+      select{
+        color: black;
       }
     }
   }

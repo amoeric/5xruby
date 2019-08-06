@@ -3,23 +3,36 @@
   padding: 10px 0;
   height: 100%;
   display: flex;
-  .tags{
+  .mission-index-tags{
     width: 15%;
-    color: #486a7e;
-    border: 1px solid black;
+    height: 700px;
     overflow: scroll;
+    color: #486a7e;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    form{
+      .tag{
+        display: inline-block;
+        padding: 10px;
+        border: 1px solid black;
+        border-radius: 95% 30% 30% 95%;
+        margin: 5px;
+        background-color: #fff;
+      }
+    }
   }
   .missions-wrap{
     padding: 10px;
     width: 60%;
-    height: 100%;
+    height: 700px;
+    overflow: scroll;
     margin-left: 20px;
     background-color: white;
     border-radius: 4px;
     .missions{
       display: flex;
       flex-wrap: wrap;
-      overflow: scroll;
       align-content: flex-start;
       .search{
         width: 100%;
