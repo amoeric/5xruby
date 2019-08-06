@@ -1,0 +1,11 @@
+<%= render 'shared/nav' %>
+<div class="tags-index">
+  <h5><%= t("tag.title") %></h5>
+  <% @tags.each do |tag| %>
+    <%= search_form_for @q, url: user_missions_path(@user), id: "index-tag" do |f| %>
+      <%= f.hidden_field :tags_category_eq, :value =>tag.category %>
+      <%= f.submit tag.category, class: "tag" %>
+    <% end %> 
+    <%= link_to  "X", user_tag_path(params[:user_id], tag), method: 'delete', class: 'tag-delete', data: { confirm: t("confirm.delete") } %>
+  <% end %>
+</div>

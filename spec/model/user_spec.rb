@@ -99,6 +99,12 @@ RSpec.describe User, type: :model do
         mission = Mission.create( title: "18person", user: user )
         expect(user.missions).to include(mission)
       end
+
+      it "管理員至少要有一個" do
+        @admin = User.create( email: 'admin@example.com', password: "123456", role: 1 )
+        @admin.destroy
+        expect(@admin.errors[:role]).to include "管理員至少要存在一個"
+      end
     end
   end
 end

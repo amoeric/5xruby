@@ -1,5 +1,13 @@
 <div class="mission-index">
-  <div class="tags"></div>
+  <div class="mission-index-tags">
+    <h5><%= t("tag.used") %></h5>
+    <% tags.each do |tag| %>
+      <%= search_form_for @q, url: user_missions_path(user), id: "tag_search" do |f| %>
+        <%= f.hidden_field :tags_category_eq, :value =>tag.category %>
+        <%= f.submit tag.category, class: "tag" %>
+      <% end %> 
+    <% end %>
+  </div>
   <div class="missions-wrap">
     <div class="missions">
       <div class="search">
