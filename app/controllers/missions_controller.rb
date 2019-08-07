@@ -7,15 +7,7 @@ class MissionsController < ApplicationController
   def index
     @q = @user.missions.ransack(params[:q])
     @missions = @q.result.page(params[:page]).per(5)
-    #在ｉｎｄｅｘ印出使用過的tag
-    missions_arr = []
-    @tags = []
-    @user.missions.includes(:tags).map{|member| missions_arr << member.tags unless member.tags.blank?}
-    missions_arr.each do |mission|
-      mission.each do |tag|
-        @tags << tag
-      end
-    end
+    @tags = Tag.joins(:missions).where("missions.user_id = ?", @user ).uniq
   end
   
   def show

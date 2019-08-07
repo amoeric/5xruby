@@ -1,7 +1,8 @@
 class TagsController < ApplicationController
+  before_action :find_user, only: :index
+  before_action :find_tag, only: :destroy
 
   def index
-    find_user
     @q = @user.missions.ransack(params[:q])
     @tags = Tag.page(params[:page]).per(30)
   end
@@ -24,7 +25,6 @@ class TagsController < ApplicationController
   end
 
   def destroy
-    find_tag
     if @tag.destroy
       if params[:mission_id]
         redirect_to user_mission_path(params[:user_id], params[:mission_id])
