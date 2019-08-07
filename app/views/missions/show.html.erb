@@ -9,7 +9,7 @@
     <h5><%= t("tag.title") %></h5>
     <% @mission.tags.each do |tag| %>
       <span class="tag">
-        <%= link_to tag.category, new_user_tag_path(params[:user_id]) %>
+        <%= tag.category %>
         <%= link_to  "X", user_mission_tag_path(params[:user_id], @mission, tag), method: 'delete', class: 'tag-delete', data: { confirm: t("confirm.delete") } %>
       </span>
     <% end %>

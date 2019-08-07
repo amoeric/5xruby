@@ -7,7 +7,7 @@ class MissionsController < ApplicationController
   def index
     @q = @user.missions.ransack(params[:q])
     @missions = @q.result.page(params[:page]).per(5)
-    @tags = Tag.joins(:missions).where("missions.user_id = ?", @user ).uniq
+    @tags = Tag.joins(:missions).where("missions.user_id = ?", @user ).distinct()
   end
   
   def show
