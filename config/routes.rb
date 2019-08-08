@@ -19,4 +19,8 @@ Rails.application.routes.draw do
   get    '/login', to: 'sessions#new'
   post   '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+
+  %w(404 500).each do |code|
+    get code, to: "errors#show", code: code
+  end
 end

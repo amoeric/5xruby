@@ -90,3 +90,11 @@
       hight: 高
   placeholder: 
     title_search: 標題、內容、標籤
+  errors:
+    error_404: 
+      title: 404  找不到此頁面
+      content: 您可能輸入錯誤地址或頁面可能已移動。
+      content2: 如果您是應用程序所有者，請檢查日誌以獲取更多訊息。
+    error_500:
+      title: 500 很抱歉，哪裡出了點問題。
+      content: 如果您是應用程序所有者，請檢查日誌以獲取更多訊息。
