@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
   root "sessions#new"
   resources :users do
-    resources :missions 
-    resources :tags 
+    resources :tags, except: [:show, :edit, :update]
+    resources :missions do
+      resources :tags, except: [:index, :show, :edit, :update]
+    end
   end
 
-  namespace :admin do
+  namespace :admin, path: "amoeric" do
     root 'pages#index'
     resources :missions 
     resources :users do

@@ -1,0 +1,39 @@
+.tag-new{
+    width: 60%;
+    margin: 70px auto 0 auto;
+    border: 1px solid black;
+    background-color: white;
+    padding: 10px;
+    div{
+      width: 100%;
+      display: flex;
+      margin: 10px 0;  
+      label{
+        width: 20%;
+      }
+      input{
+        width: 60%;
+        height: 30px;
+      }
+      .radio{
+        margin: 0;
+        label{
+          width: 80px;
+        }
+      }
+      textarea{
+        width: 60%;
+        height: 300px;
+        overflow: scroll;
+      }
+    }
+    input[type="submit"]{
+      display: block;
+      padding: 10px 20px;
+      border-radius: 14px;
+      background-color: #3cb1e7;
+      color: white;
+      font-size: 22px;
+      margin: 100px auto 0 auto;
+    }
+  }

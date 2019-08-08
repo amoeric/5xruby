@@ -1,6 +1,7 @@
 <nav class="top-list">
   <div class="nav-list-left">
     <%= link_to  t("nav.mission_list"), user_missions_path %>
+    <%= link_to  t("nav.tag_list"), user_tags_path(current_user) %>
   </div>
   <div class="nav-list-middle">
     <%= render 'shared/searchform' %>
