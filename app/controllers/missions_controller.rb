@@ -1,9 +1,13 @@
 class MissionsController < ApplicationController
   before_action :find_mission, only: [:destroy, :update, :edit]
-
+  before_action :find_user, only: [:index, :show]
+  before_action :authenticate_user!
+  layout "mission_index", :only => :index
+  
   def index
     @q = @user.missions.ransack(params[:q])
     @missions = @q.result.page(params[:page]).per(5)
+    @tags = Tag.joins(:missions).where("missions.user_id = ?", @user ).distinct()
   end
   
   def show
@@ -44,7 +48,7 @@ class MissionsController < ApplicationController
 
   private
   def params_mission
-    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status, :priority)
+    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status, :priority, tag_ids: [] )
     result[:status] = params[:mission][:status].to_i
     result[:priority] = params[:mission][:priority].to_i
     result
@@ -52,5 +56,9 @@ class MissionsController < ApplicationController
 
   def find_mission
     @mission = Mission.find(params[:id])
+  end
+
+  def find_user
+    @user = User.find(params[:user_id])
   end
 end

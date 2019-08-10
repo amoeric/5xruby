@@ -1,0 +1,19 @@
+<%= search_form_for @q, url: search_form_path, id: "title_search" do |f| %>
+  <%= f.search_field :title_cont, placeholder: t("placeholder.title_search") %>
+
+  <%= f.select :status_eq, options_for_select([
+        [ t("mission.search.option.status"), "" ],
+        [ t("enum.status.waiting"), 0],
+        [ t("enum.status.conduct"), 1],
+        [ t("enum.status.finished"), 2]
+      ]) %>
+  
+  <%= f.select :priority_eq, options_for_select([
+        [ t("mission.search.option.priority"), "" ],
+        [ t("enum.priority.low"), 0],
+        [ t("enum.priority.medium"), 1],
+        [ t("enum.priority.hight"), 2]
+      ]) %>
+
+  <%= f.submit t("mission.search_btn"), class: "btn btn-primary" %>
+<% end %>

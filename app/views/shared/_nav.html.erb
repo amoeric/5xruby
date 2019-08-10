@@ -1,5 +1,15 @@
 <nav class="top-list">
-  <%= link_to  t("back.user_list"), users_path %>
-  <%= link_to  t("back.mission_list"), user_missions_path %>
-  <%= link_to  t("back.new_mission"), new_user_mission_path(@user) %>
+  <div class="nav-list-left">
+    <%= link_to  t("nav.mission_list"), user_missions_path(current_user) %>
+    <%= link_to  t("nav.tag_list"), user_tags_path(current_user) %>
+  </div>
+  <div class="nav-list-right">
+    <%= link_to  t("nav.new_mission"), new_user_mission_path(current_user) %>
+    <ul class="nav-list-ul">
+      <%= "#{t("user.hi")}#{current_user.email}▿" %>
+      <li><%= link_to t("user.profile"), user_path(current_user) %></li>
+      <li><%= link_to t("user.logout"), logout_path(current_user), method: 'delete' %></li>
+      <li><%= link_to t("admin.home"), admin_root_path if current_user.admin? %></li>
+    </ul>
+  </div>
 </nav>

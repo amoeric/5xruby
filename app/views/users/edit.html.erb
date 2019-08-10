@@ -1,0 +1,22 @@
+<%= render 'shared/nav' %>
+<div class="user-new">
+  <%= form_for @user, controller: 'users', action: 'edit' do |form| %>
+    <%= render 'shared/errors', user: @user %>
+    <div class="field">
+      <%= form.label :email %>
+      <%= form.text_field :email %>
+    </div>
+    
+    <div class="field">
+      <%= form.label :password %>
+      <%= form.password_field :password %>
+    </div>
+    
+    <div class="field">
+      <%= form.label :password_confirmation, t("message.again") %>
+      <%= form.password_field :password_confirmation %>
+    </div>
+    
+    <%= form.submit t("submit") %>
+  <% end %>
+</div>

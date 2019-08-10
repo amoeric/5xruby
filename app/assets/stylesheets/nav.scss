@@ -6,11 +6,12 @@
   position: fixed;
   z-index: 3;
   top: 0;
-  background-color: #e84118;
+  background-color: #016ba4;
   line-height: 60px;
   color: aliceblue;
   h1{
     display: inline-block;
+    color: white;
   }
   a{
     display: inline-block;
@@ -21,5 +22,47 @@
   a:hover{
       color: #81ecec;
       transition: .5s;
+  }
+  .nav-list-left{
+    width: 20%;
+  }
+  .nav-list-middle{
+    width: 50%;
+    form{ 
+      input{
+        color: white;
+        border-radius: 4px;
+        border: none;
+        background-color: #0a5988;
+        height: 30px;
+        padding-left: 10px;
+      }
+      select{
+        color: black;
+      }
+    }
+  }
+  .nav-list-right{
+    width: 30%;
+    text-align: right;
+    margin-left: auto;
+    .nav-list-ul{
+      display: inline-block;
+      padding-right: 10px;
+      list-style:none;
+      cursor: pointer;
+    }
+    li{
+      display: none;
+      background-color: #fff;
+      text-align: center;
+      border: 1px solid black;
+      a{
+        color: black;
+      }
+    }
+    a{
+      vertical-align: top;
+    }
   }
 }

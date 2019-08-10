@@ -1,13 +1,10 @@
-<% if @mission.errors.any? %>
-<ul>
-  <% @mission.errors.full_messages.each do |message| %>
-  <li><%= message %></li>
-  <% end %>
-</ul>
-<% end %>
+<%= render 'shared/nav' %>
 <div class="mission-new">
-    <h1><%= t("mission.new") %></h1>
+  <h1><%= t("mission.new") %></h1>
+  <%= render 'shared/errors', user: @mission %>
+  <%= link_to  t("tag.new"), new_user_tag_path(params[:user_id]) %>
   <%= simple_form_for @mission, url: { action: "create" }, html: { id: "new_mission" } do |mission| %>
+    <%= mission.collection_check_boxes :tag_ids, Tag.all, :id, :category %>
     <%= mission.hidden_field :user_id, value: params[:user_id] %>
     <%= mission.input :title %>
     <%= mission.input :content %>

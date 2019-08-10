@@ -1,21 +1,38 @@
 "zh-TW":
   Login page: 登入頁面
   return: 返回
-  back:
+  nav:
     mission_list: 任務列表
     user_list: 使用者列表
+    tag_list: 標籤列表
     new_mission: 新增任務
+    user_model: 使用者模式
+    admin_model: 管理者模式
   submit: 送出
+  admin: 
+    home: 管理者首頁
+    user_list: 查看所有使用者
+    mission_list: 查看所有任務
   users: 使用者
   user: 
+    hi: Hi,
+    email: E-mail
     new: 新增使用者
     delete: 刪除使用者
+    edit: 編輯個人資料
+    update: 更新會員資料
+    profile: 我的檔案
+    logout: 登出
+    login: Log in
+    signup: Sign Up
+    mission_count: 任務數量
+    authority: 使用者權限
   mission:
-    new: 來新增任務吧
+    new: 新增任務
     check: 查看任務
     edit: 修改任務
     delete: 刪除任務
-    home: 這是任務首頁
+    home: 任務首頁
     detail: 任務細節
     title: 任務名稱
     content: 任務內容
@@ -36,18 +53,32 @@
       create_time: 以創建時間排序
       end_time: 以結束時間排序
       priority: 以優先權排序
+  tag:
+    new: 新增標籤
+    title: 標籤：
+    empty: 沒有標籤
+    used: 有標籤的任務
   confirm:
     delete: 確認刪除？
   notice:
     new_mission_success: 新增任務成功!
     edit_mission_success: 任務修改成功！
-    delete_mission_success: 刪除成功！
+    delete_mission_success: 任務刪除成功！
     new_user_success: 新增使用者成功！
+    edit_user_success: 更新使用者成功！
     delete_user_success: 使用者刪除成功！
+    login_first: 請先登入
+    authority_not_enough: 權限不足
+    not_found_user: 找不到使用者
+    login_success: 登入成功！
+    login_error: 帳號密碼錯誤
+    logout_success: 已登出
+    user_destroy_error: 刪除使用者失敗，管理員必須有一個
   message:
     account: 這帳號已經有人使用囉
     timerange: 結束日期不能比開始日期早哦！
     search_empty: 查無此結果
+    again: 再輸入一次
   enum:
     status:
       waiting: 待處理
@@ -57,3 +88,13 @@
       low: 低
       medium: 中
       hight: 高
+  placeholder: 
+    title_search: 標題、內容、標籤
+  errors:
+    error_404: 
+      title: 404  找不到此頁面
+      content: 您可能輸入錯誤地址或頁面可能已移動。
+      content2: 如果您是應用程序所有者，請檢查日誌以獲取更多訊息。
+    error_500:
+      title: 500 很抱歉，哪裡出了點問題。
+      content: 如果您是應用程序所有者，請檢查日誌以獲取更多訊息。

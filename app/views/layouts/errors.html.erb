@@ -10,10 +10,10 @@
   </head>
 
   <body>
-    <%= render 'shared/nav'%>
-    <div class="wrap">
-      <p class="flash"><%= flash[:notice] %></p>
-      <%= yield %>
+    <div class="errors-wrap">
+      <div class="error">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

@@ -2,17 +2,53 @@ require 'spec_helper'
 require 'date'
 
 feature "任務管理系統" do
-  let(:user1){ User.create(account: 'zxc123', password: '123456') }
-  let(:user2){ User.create(account: 'eric', password: '123456') }
+  let(:user1){ User.create(email: '123@example.com', password: '123456') }
+  let(:user2){ User.create(email: 'amoeric@example.com', password: '123456') }
   
   before do
     user1
     user2
-    user_login(account:user1.account)
+    user_login(email:user1.email, password: user1.password)
   end
 
   after do
+    TagMission.destroy_all
     Mission.destroy_all
+    Tag.destroy_all
+    User.destroy_all
+  end
+
+  context "使用者的新增、修改" do
+    scenario "新增使用者" do
+      user_logout
+      click_on 'Sign Up'
+      within "form" do
+        fill_in 'user[email]', with: "asdf123@example.com"
+        fill_in 'user[password]', with: "123456"
+        fill_in 'user[password_confirmation]', with: "123456"
+      end
+      click_on '送出'
+      expect(page).to have_content "新增使用者成功！"
+      new_user = User.last
+      expect(new_user.email).to eq "asdf123@example.com"
+    end
+
+    scenario "修改使用者" do
+      find('.nav-list-ul').click
+      click_on '我的檔案'
+      expect(page).to have_content "更新會員資料"
+      click_on '更新會員資料'
+      before_user = User.find_by_email('123@example.com')
+      within "form" do
+        fill_in 'user[email]', with: "xeriok02390@example.com"
+        fill_in 'user[password]', with: "123456"
+        fill_in 'user[password_confirmation]', with: "123456"
+        click_on '送出'
+      end
+      expect(page).to have_content "更新使用者成功！"
+      after_user = User.find(before_user.id)
+      expect(after_user.email).to eq "xeriok02390@example.com"
+    end
   end
 
   context "任務的CRUD" do
@@ -26,7 +62,7 @@ feature "任務管理系統" do
       create_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       expect(page).to have_content "任務二"
-      page.first('div.mission', :text => '任務二').click_on I18n.t("mission.check")
+      page.first('div.mission', :text => '任務二').click_on "查看任務"
       expect(page).to have_content "任務二"
       expect(page).to have_content "五倍紅寶石"
     end
@@ -57,7 +93,8 @@ feature "任務管理系統" do
       create_mission(title: '看不到此任務', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       check_mission(title: '看不到此任務', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       expect(page).to have_content "看不到此任務"
-      user_login(account:'eric')
+      user_logout
+      user_login(email:'amoeric@example.com' ,password: '123456')
       create_mission(title: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       check_mission(title: '任務一', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "待處理", priority: "低")
       expect(page).to have_content "任務一"
@@ -85,7 +122,7 @@ feature "任務管理系統" do
     end
     
     scenario "可設定任務的開始及結束時間" do
-      expect(page).to have_content "查詢"
+      expect(page).to have_content "以結束時間排序"
       edit_mission(mission: '任務二', title: '任務二', content: '五倍紅寶石', start_time: "2020-04-22 10:30", end_time: "2020-04-22 11:30", status: "待處理", priority: "中")
       check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-22 10:30", end_time: "2020-04-22 11:30", status: "待處理", priority: "中")
       expect(page.first('div.mission', :text => "任務二")).to have_content "2020-04-22 10:30:00 +0800"
@@ -154,7 +191,7 @@ feature "任務管理系統" do
     
     scenario "依標題查詢" do
       within '#title_search' do
-        fill_in 'q[title_cont]', with: '十八銅人'
+        fill_in 'q[title_or_content_or_tags_category_cont]', with: '十八銅人'
       end
       click_on '查詢'
       expect(page.first("div.mission")).to have_content "十八銅人"
@@ -180,17 +217,43 @@ feature "任務管理系統" do
     end
   end
   
-  
+  context "標籤" do
+    let(:mission_tag1){create_mission(title: '十八銅人', content: '五倍紅寶石', start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30", status: "已完成", priority: "低", tag: "my_tag")}
+    
+    before do
+      mission_tag1
+    end
 
-  scenario "可為任務加上分類標籤" do
+    scenario "可為任務加上分類標籤" do  
+      last_mission_tags = Tag.last.missions
+      expect(page).to have_content last_mission_tags[0].title
+    end
+
+    scenario "可用標籤查詢" do
+      within '#title_search' do
+        fill_in 'q[title_or_content_or_tags_category_cont]', with: "my_tag"
+      end
+      click_on '查詢'
+      last_mission_tags = Tag.last.missions
+      expect(page).to have_content last_mission_tags[0].title
+    end
   end
   
   #user相關
-  def user_login(account: )
-    visit '/users'
-    page.find('div.user', :text => account).click_on '查看任務'
+  def user_login(email: , password: )
+    visit root_path
+    within "form" do
+      fill_in 'session[email]', with: email
+      fill_in 'session[password]', with: password
+    end
+    click_on 'Log in'
   end
   
+  def user_logout
+    find('.nav-list-ul').click
+    click_on '登出'
+    expect(page).to have_content "已登出"
+  end
   #mission相關
   def check_mission(title: , content: , start_time: , end_time: , status: , priority: )
     mission = Mission.last
@@ -202,9 +265,18 @@ feature "任務管理系統" do
     expect(mission.priority).to eq enum_mission(value: priority)
   end
 
-  def create_mission(title: , content: , start_time: , end_time: , status: , priority: )
-    click_on I18n.t("back.new_mission")
-    expect(page).to have_content I18n.t("back.mission_list")
+  def create_mission(title: , content: , start_time: , end_time: , status: , priority: , tag: 0)
+    click_on "新增任務"
+    expect(page).to have_content "任務列表"
+    if tag != 0
+      click_on "新增標籤"
+      within "#new_tag" do
+        fill_in "tag[category]", with: tag
+      end
+      click_on '新增Tag'
+      find(".collection_check_boxes", text: tag).click
+    end
+    
     within '#new_mission' do
       fill_in 'mission[title]', with: title
       fill_in 'mission[content]', with: content
@@ -227,7 +299,7 @@ feature "任務管理系統" do
   end
 
   def edit_mission(mission: , title: , content: , start_time: , end_time: , status: , priority: )
-    page.first('div.mission', :text => mission).click_on I18n.t("mission.edit")
+    page.first('div.mission', :text => mission).click_on "修改任務"
     expect(find_field('mission[title]').value).to eq mission
     within 'form' do
       fill_in 'mission[title]', with: title

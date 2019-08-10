@@ -1,0 +1,54 @@
+.admin-missions{
+  height: 700px;
+  overflow: scroll;
+  text-align: center;
+  margin-top: 70px;
+  .flash{
+    color: white;
+  }
+  .admin-mission{
+    width: 95%;
+    height: 200px;
+    border-bottom:1px solid black; 
+    display: flex;
+    color: black;
+    background-color: #fff;
+    text-align: left;
+    align-content: center;
+    margin: auto;
+    .title{
+      width: 10%;
+    }
+    .content{
+      width: 30%;
+      padding: 5px;
+    }
+    .start_time, .end_time{
+      width: 10%;
+    }
+    .status, .priority{
+      width: 10%;
+    }
+    .links{
+      width: 20%;
+      margin-right: auto;
+    }
+  }
+  .pagination{
+    margin: auto;
+    color: white;
+  }
+}
+
+.admin-edit-mission-wrap{
+  margin-top: 70px;
+  .admin-edit-mission{
+    width: 50%;
+    height: 600px;
+    padding: 10px;
+    margin: auto;
+    line-height: 30px;
+    background-color: #fff;
+    color: black;
+  }
+}

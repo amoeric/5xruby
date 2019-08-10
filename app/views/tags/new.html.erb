@@ -1,0 +1,9 @@
+<%= render 'shared/nav' %>
+<%= render 'shared/errors', user: @tag %>
+<div class="tag-new">
+  <h1><%= t("tag.new") %></h1>
+  <%= simple_form_for @tag, url: { action: "create" }, html: { id: "new_tag" } do |form| %>
+    <%= form.input :category %>
+    <%= form.submit %>
+  <% end %>
+</div>
