@@ -8,10 +8,6 @@ RSpec.describe User, type: :model do
       user
     end
     
-    after do
-      User.destroy_all
-    end
-    
     context "email驗證" do
       it "@沒字不給過" do
         user.email = "@example.com"

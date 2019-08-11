@@ -11,13 +11,6 @@ feature "任務管理系統" do
     user_login(email:user1.email, password: user1.password)
   end
 
-  after do
-    TagMission.destroy_all
-    Mission.destroy_all
-    Tag.destroy_all
-    User.destroy_all
-  end
-
   context "使用者的新增、修改" do
     scenario "新增使用者" do
       user_logout
@@ -127,9 +120,6 @@ feature "任務管理系統" do
       check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-22 10:30", end_time: "2020-04-22 11:30", status: "待處理", priority: "中")
       expect(page.first('div.mission', :text => "任務二")).to have_content "2020-04-22 10:30:00 +0800"
       expect(page.first('div.mission', :text => "任務二")).to have_content "2020-04-22 11:30:00 +0800"
-    end
-
-    scenario "可以依照開始時間排序" do
     end
 
     scenario "可以依照結束時間排序" do
