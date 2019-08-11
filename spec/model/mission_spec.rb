@@ -1,14 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe Mission, type: :model do
-  let(:user) do
-    login_user = User.find_by(email: "amoeric@example.com")
-    login_user = User.create( email: "amoeric@example.com", password: "123456" ) if login_user.nil?
-    login_user
-  end
+  let(:user) { FactoryBot.create(:user, :user2) }
 
   describe "mission model 測試" do 
-    let(:mission){ Mission.new( title: "18person", user: user ) }
+    let(:mission){ FactoryBot.build( :mission, user: user ) }
 
     before do
       mission
@@ -58,9 +54,9 @@ RSpec.describe Mission, type: :model do
     end
 
     context "搜尋" do
-      let(:mission_one){ Mission.create( title: "18person", content:"5xruby", status: 1, priority: 0, user_id: user.id, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" ) }
-      let(:mission_two){ Mission.create( title: "18person", content:"ericisme", status: 1, priority: 0, user_id: user.id, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" ) }
-      let(:mission_three){ Mission.create( title: "hellomission", content:"5xruby", status: 2, priority: 2, user_id: user.id, start_time: "2020-04-19 10:30", end_time: "2020-04-19 11:30" ) }
+      let(:mission_one){ FactoryBot.create( :mission, user: user ) }
+      let(:mission_two){ FactoryBot.create( :mission, :mission2, user: user ) }
+      let(:mission_three){ FactoryBot.create( :mission, :mission3, user: user ) }
 
       before do
         mission_one
@@ -81,12 +77,8 @@ RSpec.describe Mission, type: :model do
       it "以優先權搜尋" do
         @q = user.missions.ransack(priority_eq: 2)
         expect(@q.result).to include (mission_three)
-        reset!
       end
     end
-  end
-  def reset!
-    User.destroy_all
-    Mission.destroy_all
+    
   end
 end
