@@ -289,7 +289,7 @@ feature "任務管理系統" do
   end
 
   def edit_mission(mission: , title: , content: , start_time: , end_time: , status: , priority: )
-    page.first('div.mission', :text => mission).click_on "修改任務"
+    page.first('div.mission', :text => mission).click_on "編輯任務"
     expect(find_field('mission[title]').value).to eq mission
     within 'form' do
       fill_in 'mission[title]', with: title

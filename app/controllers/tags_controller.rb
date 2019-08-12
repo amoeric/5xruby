@@ -9,16 +9,13 @@ class TagsController < ApplicationController
 
   def new
     @tag = Tag.new
+    before_path(URI(request.referer || '').path)
   end
-  
+
   def create
     @tag = Tag.new(tag_params)
     if @tag.save
-      if params[:mission_id]
-        redirect_to user_mission_path(params[:user_id], params[:mission_id])
-      else
-        redirect_to new_user_mission_path(params[:user_id])
-      end
+      redirect_path(session['before_path'])
     else
       render :new 
     end
@@ -45,5 +42,20 @@ class TagsController < ApplicationController
 
   def find_tag
     @tag = Tag.find(params[:id])
+  end
+
+  def before_path(path)
+    session['before_path'] = path unless path.nil?
+  end
+
+  def redirect_path(session_path)
+    path = session_path.split('/')
+    if path.last == 'edit'
+      #mission-edit
+      redirect_to edit_user_mission_path(params[:user_id], path[4])
+    else
+      #mission-new
+      redirect_to new_user_mission_path(params[:user_id])
+    end
   end
 end

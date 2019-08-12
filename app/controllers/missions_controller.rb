@@ -11,6 +11,7 @@ class MissionsController < ApplicationController
   end
   
   def show
+    @q = @user.missions.ransack(params[:q])
     @mission = @user.missions.find(params[:id])
   end
 

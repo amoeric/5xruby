@@ -30,14 +30,14 @@
   mission:
     new: 新增任務
     check: 查看任務
-    edit: 修改任務
+    edit: 編輯任務
     delete: 刪除任務
     home: 任務首頁
-    detail: 任務細節
-    title: 任務名稱
-    content: 任務內容
-    start_time: 任務開始時間
-    end_time: 任務結束時間
+    detail: 細節
+    title: 名稱
+    content: 內容
+    start_time: 開始時間
+    end_time: 結束時間
     empty: 沒有任務
     status: 任務狀態
     priority: 優先權
@@ -57,7 +57,7 @@
     new: 新增標籤
     title: 標籤：
     empty: 沒有標籤
-    used: 有標籤的任務
+    used: 有任務的標籤
   confirm:
     delete: 確認刪除？
   notice:
