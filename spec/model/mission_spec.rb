@@ -1,10 +1,10 @@
 require 'spec_helper'
 
 RSpec.describe Mission, type: :model do
-  let(:user) { FactoryBot.create(:user, :user2) }
+  let(:user) { create(:user, :user2) }
 
   describe "mission model 測試" do 
-    let(:mission){ FactoryBot.build( :mission, user: user ) }
+    let(:mission){ build( :mission, user: user ) }
 
     before do
       mission
@@ -54,9 +54,9 @@ RSpec.describe Mission, type: :model do
     end
 
     context "搜尋" do
-      let(:mission_one){ FactoryBot.create( :mission, user: user ) }
-      let(:mission_two){ FactoryBot.create( :mission, :mission2, user: user ) }
-      let(:mission_three){ FactoryBot.create( :mission, :mission3, user: user ) }
+      let(:mission_one){ create( :mission, user: user ) }
+      let(:mission_two){ create( :mission, :mission2, user: user ) }
+      let(:mission_three){ create( :mission, :mission3, user: user ) }
 
       before do
         mission_one

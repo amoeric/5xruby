@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe User, type: :model do
   describe do 
-    let(:user){ FactoryBot.build(:user) }
+    let(:user){ build(:user) }
 
     before do
       user
@@ -48,14 +48,14 @@ RSpec.describe User, type: :model do
 
       it "相同email不能註冊" do
         user.save
-        user2 = FactoryBot.build(:user)
+        user2 = build(:user)
         user2.valid?
         expect(user2).to_not be_valid
       end
   
       it "帳號驗證，相同帳號不能註冊，出現設定的錯誤訊息" do
         user.save
-        user2 = FactoryBot.build(:user)
+        user2 = build(:user)
         user2.valid?
         expect(user2.errors.messages[:email]).to include "這帳號已經有人使用囉"
       end
@@ -99,7 +99,7 @@ RSpec.describe User, type: :model do
       end
 
       it "管理員至少要有一個" do
-        @admin = FactoryBot.create(:user, :admin)
+        @admin = create(:user, :admin)
         @admin.destroy
         expect(@admin.errors[:role]).to include "管理員至少要存在一個"
       end

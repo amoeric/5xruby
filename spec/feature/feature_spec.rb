@@ -2,8 +2,8 @@ require 'spec_helper'
 require 'date'
 
 feature "任務管理系統" do
-  let(:user1){ FactoryBot.create(:user) }
-  let(:user2){ FactoryBot.create(:user, :user2) }
+  let(:user1){ create(:user) }
+  let(:user2){ create(:user, :user2) }
   
   before do
     user1
