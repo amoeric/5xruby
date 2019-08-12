@@ -51,6 +51,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
   gem 'faker', '~> 1.9', '>= 1.9.6'
+  gem 'database_cleaner', '~> 1.7'
   gem 'pg', '~> 1.1', '>= 1.1.4'
 end
 

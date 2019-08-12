@@ -1,7 +1,12 @@
 <nav class="top-list">
-  <h1><%= t("user.new") %></h1>
-  <%= link_to t("return"), users_path %>
+  <div class="nav-list-left">
+    <h1><%= t("user.new") %></h1>
+    <%= link_to t("return"), root_path %>
+  </div>
+  <div class="nav-list-middle"></div>
+  <div class="nav-list-right"></div>
 </nav>
+
 <div class="user-new">
   <%= form_for @user, controller: 'users', action: 'create' do |form| %>
     <%= render 'shared/errors', user: @user %>

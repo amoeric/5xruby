@@ -2,20 +2,13 @@ require 'spec_helper'
 require 'date'
 
 feature "任務管理系統" do
-  let(:user1){ User.create(email: '123@example.com', password: '123456') }
-  let(:user2){ User.create(email: 'amoeric@example.com', password: '123456') }
+  let(:user1){ create(:user) }
+  let(:user2){ create(:user, :user2) }
   
   before do
     user1
     user2
     user_login(email:user1.email, password: user1.password)
-  end
-
-  after do
-    TagMission.destroy_all
-    Mission.destroy_all
-    Tag.destroy_all
-    User.destroy_all
   end
 
   context "使用者的新增、修改" do
@@ -127,9 +120,6 @@ feature "任務管理系統" do
       check_mission(title: '任務二', content: '五倍紅寶石', start_time: "2020-04-22 10:30", end_time: "2020-04-22 11:30", status: "待處理", priority: "中")
       expect(page.first('div.mission', :text => "任務二")).to have_content "2020-04-22 10:30:00 +0800"
       expect(page.first('div.mission', :text => "任務二")).to have_content "2020-04-22 11:30:00 +0800"
-    end
-
-    scenario "可以依照開始時間排序" do
     end
 
     scenario "可以依照結束時間排序" do
@@ -299,7 +289,7 @@ feature "任務管理系統" do
   end
 
   def edit_mission(mission: , title: , content: , start_time: , end_time: , status: , priority: )
-    page.first('div.mission', :text => mission).click_on "修改任務"
+    page.first('div.mission', :text => mission).click_on "編輯任務"
     expect(find_field('mission[title]').value).to eq mission
     within 'form' do
       fill_in 'mission[title]', with: title

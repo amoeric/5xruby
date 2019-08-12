@@ -1,17 +1,16 @@
 FactoryBot.define do
-    factory :user do
-      title { Faker::Name.name }
-      price { Faker::Number.between(1, 20) }
-      description { Faker::Lorem.paragraphs }
-      is_available { Faker::Boolean.boolean }
-    end
-  
-    trait :ruby do #特徵
-      title { "ruby" }
-    end
-  
-    trait :free do
-      price { 0 }
-    end
+  factory :user do
+    email { '123@example.com' }
+    password { '123456' }
   end
+  
+  trait :user2 do
+    email { 'amoeric@example.com' }
+  end
+
+  trait :admin do
+    email { 'admin@example.com' }
+    role { 1 }
+  end
+end
   
