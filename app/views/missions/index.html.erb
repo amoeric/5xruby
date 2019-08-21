@@ -1,1 +1,33 @@
-<%= render 'shared/missionlist', missions: @missions, user: @user, tags: @tags %>
+<div class="mission-index">
+  <div class="mission-index-tags">
+    <h5><%= t("tag.used") %></h5>
+    <% @tags.each do |tag| %>
+      <%= search_form_for @q, url: user_missions_path(@user), id: "index-tag" do |f| %>
+        <%= f.hidden_field :tags_category_eq, :value =>tag.category %>
+        <%= f.submit tag.category, class: "tag" %>
+      <% end %> 
+    <% end %>
+  </div>
+  <div class="missions-wrap">
+    <div class="missions">
+      <div class="search">
+        <%= sort_link(@q, :end_time, default_order: :desc) do %>
+          <strong><%= t("mission.sort.end_time") %></strong>
+        <% end %>
+        
+        <%= sort_link(@q, :priority, default_order: :desc) do %>
+          <strong><%= t("mission.sort.priority") %></strong>
+        <% end %>
+        
+        <%= sort_link(@q, :created_at, default_order: :desc) do %>
+          <strong><%= t("mission.sort.create_time") %></strong>
+        <% end %>  
+      </div>
+      <h1><%= t('mission.empty') if @missions.empty? && flash[:notice].nil? %></h1>
+      <p class="flash"><%= flash[:notice] %></p>
+      <%= render @missions %>
+      <%= paginate @missions, left: 1, right: 3 %>
+    </div>
+  </div> 
+</div>
+  

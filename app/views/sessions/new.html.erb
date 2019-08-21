@@ -1,9 +1,8 @@
 <div class="login-page">
-  <%= form_for(:session, url: login_path) do |f| %>
+  <h1><%= t("Login page") %></h1>
+  <div class="notice"><%= flash[:notice] %></div>  
+  <%= form_with scope: :session, url: login_path do |f| %>
 
-    <div class="notice"><%= flash[:notice] %></div>  
-    <h1><%= t("Login page") %></h1>
-    
     <%= f.label :email %>
     <%= f.text_field :email, class: 'form-control' %>
   

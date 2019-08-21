@@ -10,9 +10,11 @@
   </head>
 
   <body>
-    <div class="wrap">
-      <%= render 'shared/nav' %>
-      <%= yield %>
+    <div class="admin-all-wrap">
+      <%= render 'admin/shared/mission_index_nav' %>
+      <div class="admin-wrap">
+        <%= yield %>
+      </div>
     </div>
   </body>
 </html>

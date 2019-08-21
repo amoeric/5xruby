@@ -1,4 +1,3 @@
-<%= render 'admin/shared/mission_index_nav' %>
 <div class="admin-missions">
   <div class="search">
     <%= sort_link(@q, :end_time, default_order: :desc) do %>
@@ -11,26 +10,11 @@
     
     <%= sort_link(@q, :created_at, default_order: :desc) do %>
       <strong><%= t("mission.sort.create_time") %></strong>
-      <% end %>  
+    <% end %>  
     <p class="flash"><%= flash[:notice] %></p>
   </div>
   <h1><%= t('mission.empty') if @missions.empty? %></h1>
-  <% @missions.each do |mission| %>
-    <div class="admin-mission">
-      <div class="title"><%= t("mission.title") %>：<%= mission.title %></div>
-      <div class="content"><%= t("mission.content") %>：<%= mission.content %></div>
-      <div class="start_time"><%= t("mission.start_time") %>：<%= mission.start_time %></div>
-      <div class="end_time"><%= t("mission.end_time") %>：<%= mission.end_time %></div>
-      <div class="status"><%= t("mission.status") %>：<%= mission.status %></div>
-      <div class="priority"><%= t("mission.priority") %>：<%= mission.priority %></div>
-      <div class="links">
-        <%= link_to t("mission.check"), mission_show_path(mission) %>
-        <%= link_to t("mission.edit"), edit_admin_mission_path(mission) %>
-        <%= link_to t("mission.delete"), mission_delete_path(mission), method:'DELETE', data: { confirm: t("confirm.delete") } %>
-      </div>
-      <h4><%= t("mission.expired") if checkendtime(mission.end_time) %></h4>
-    </div>
-  <% end %>
+  <%= render @missions %>
   <%= paginate @missions, left: 1, right: 3 %>
 </div>
         

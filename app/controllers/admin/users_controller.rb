@@ -2,7 +2,7 @@ class Admin::UsersController < Admin::PagesController
   before_action :find_user, only: [:edit, :update, :destroy]
 
   def index
-    @users = User.includes(:missions).page(params[:page]).per(10)
+    @users = User.includes(:missions).where('id NOT IN (?)', current_user).page(params[:page]).per(10)
   end
 
   def edit

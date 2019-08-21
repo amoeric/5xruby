@@ -1,7 +1,8 @@
 class TagsController < ApplicationController
   before_action :find_user, only: :index
   before_action :find_tag, only: :destroy
-
+  before_action :authenticate_user!
+  
   def index
     @q = @user.missions.ransack(params[:q])
     @tags = Tag.page(params[:page]).per(30)
@@ -9,12 +10,13 @@ class TagsController < ApplicationController
 
   def new
     @tag = Tag.new
-    before_path(URI(request.referer || '').path)
+    session['before_path'] = URI(request.referer || '').path
   end
 
   def create
     @tag = Tag.new(tag_params)
     if @tag.save
+      redirect_to root_path(current_user) if session['before_path'].blank?
       redirect_path(session['before_path'])
     else
       render :new 
@@ -33,19 +35,15 @@ class TagsController < ApplicationController
 
   private
   def tag_params
-    params.require(:tag).permit(:category, mission_ids:[])
+    params.require(:tag).permit(:category)
   end
 
   def find_user
-    @user = User.find(params[:user_id])
+    @user = User.find( params[:user_id])
   end
 
   def find_tag
-    @tag = Tag.find(params[:id])
-  end
-
-  def before_path(path)
-    session['before_path'] = path unless path.nil?
+    @tag = Tag.find( params[:id])
   end
 
   def redirect_path(session_path)

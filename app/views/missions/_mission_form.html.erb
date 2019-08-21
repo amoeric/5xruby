@@ -1,0 +1,11 @@
+<%= simple_form_for [current_user, mission] do |mission| %>
+  <%= mission.collection_check_boxes :tag_ids, Tag.all, :id, :category %>
+  <%= mission.hidden_field :user_id, value: params[:user_id] %>
+  <%= mission.input :title %>
+  <%= mission.input :content %>
+  <%= mission.input :start_time %>
+  <%= mission.input :end_time %>
+  <%= mission.input :status, as: :radio_buttons, collection: [[0, t("enum.status.waiting")], [1, t("enum.status.conduct")], [2, t("enum.status.finished")]], label_method: :second, value_method: :first, checked: [0] %>
+  <%= mission.input :priority, as: :radio_buttons, collection: [[ 0, t("enum.priority.low")], [ 1, t("enum.priority.medium")], [ 2, t("enum.priority.hight")]], label_method: :second, value_method: :first, checked: [0] %>
+  <%= mission.submit t("submit") %>
+<% end %>

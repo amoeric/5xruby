@@ -34,12 +34,12 @@
     delete: 刪除任務
     home: 任務首頁
     detail: 細節
-    title: 名稱
-    content: 內容
-    start_time: 開始時間
-    end_time: 結束時間
+    title: 名稱：
+    content: 內容：
+    start_time: 開始時間：
+    end_time: 結束時間：
     empty: 沒有任務
-    status: 任務狀態
+    status: 任務狀態：
     priority: 優先權
     search: 
       status: 以任務狀態查詢：
@@ -79,6 +79,7 @@
     timerange: 結束日期不能比開始日期早哦！
     search_empty: 查無此結果
     again: 再輸入一次
+    not_self: 非本人
   enum:
     status:
       waiting: 待處理

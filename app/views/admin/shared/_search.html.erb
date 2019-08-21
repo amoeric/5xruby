@@ -1,5 +1,5 @@
 <%= search_form_for @q, url: search_form_path, id: "title_search" do |f| %>
-  <%= f.search_field :title_cont, placeholder: t("placeholder.title_search") %>
+  <%= f.search_field :title_or_content_or_tags_category_cont, placeholder: t("placeholder.title_search") %>
 
   <%= f.select :status_eq, options_for_select([
         [ t("mission.search.option.status"), "" ],
