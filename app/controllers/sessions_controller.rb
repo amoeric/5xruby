@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   before_action :user_sign_in?, only: :new
+  layout 'login', only: [:new]
 
   def new
   end

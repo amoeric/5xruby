@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root "sessions#new"
-  resources :users do
+  resources :users, except: [:index, :destroy] do
     resources :tags, except: [:show, :edit, :update]
     resources :missions do
       resources :tags, except: [:index, :show, :edit, :update]

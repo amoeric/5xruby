@@ -1,15 +1,16 @@
 class Admin::MissionsController < Admin::PagesController
   before_action :find_mission, only: [:destroy, :edit, :update]
-  
+
   def index
     #分為從使用者進去跟直接進任務列表，看個人、看全部
     if params[:user_id]
       find_user
       @q = @user.missions.ransack(params[:q])
+      @tags = Tag.joins(:missions).where("missions.user_id = ?", @user ).distinct()
     else
       @q = Mission.ransack(params[:q])
     end
-
+    
     @missions = @q.result.page(params[:page]).per(10)
   end
 
@@ -60,7 +61,7 @@ class Admin::MissionsController < Admin::PagesController
   end
 
   def params_mission
-    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status, :priority)
+    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status, :priority )
     result[:status] = params[:mission][:status].to_i
     result[:priority] = params[:mission][:priority].to_i
     result

@@ -1,0 +1,16 @@
+<div class="<%= check_end_time(mission.end_time) ? 'expired mission' : 'mission' %>">
+  <div class="mission-content">
+    <div class="mission-title"><%= t("mission.title") %>：<%= mission.title %></div>
+    <div class="content"><%= t("mission.content") %>：<%= mission.content %></div>
+    <div class="start_time"><%= t("mission.start_time") %>：<%= mission.start_time %></div>
+    <div class="end_time"><%= t("mission.end_time") %>：<%= mission.end_time %></div>
+    <div class="status"><%= t("mission.status") %>：<%= mission.status %></div>
+    <div class="priority"><%= t("mission.priority") %>：<%= mission.priority %></div>
+  </div>
+  <div class="links">
+    <h4><%= t("mission.expired") if check_end_time(mission.end_time) %></h4>
+    <%= link_to t("mission.check"), user_mission_path(@user, mission) %>
+    <%= link_to t("mission.edit"), edit_user_mission_path(@user, mission) %>
+    <%= link_to t("mission.delete"), user_mission_path(@user, mission), method:'DELETE', data: { confirm: t("confirm.delete") } %>
+  </div>
+</div>

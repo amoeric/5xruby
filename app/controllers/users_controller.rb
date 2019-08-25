@@ -1,10 +1,8 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: [:edit, :update]
   before_action :find_user, except: [:index, :new, :create]
+  layout "login", only: [:new]
   
-  def index
-  end
-
   def show
   end
 
@@ -34,20 +32,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def destroy
-    if @user.destroy
-      redirect_to users_path, notice: I18n.t("notice.delete_user_success")
-    else
-      render :index
-    end
-  end
-
   private
   def params_user
-    params.require(:user).permit(:email, :password, :role, :password_confirmation)
+    params.require(:user).permit(:email, :role, :password, :password_confirmation)
   end
 
   def find_user
-    @user = User.find(params[:id])
+    @user = User.find( params[:id])
   end
 end

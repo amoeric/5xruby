@@ -1,6 +1,6 @@
 class Admin::PagesController < ApplicationController
-  include SessionHelper
   before_action :admin?
+  layout "admin/application"
 
   def index
   end

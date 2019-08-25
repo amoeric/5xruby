@@ -2,17 +2,17 @@ class MissionsController < ApplicationController
   before_action :find_mission, only: [:destroy, :update, :edit]
   before_action :find_user, only: [:index, :show]
   before_action :authenticate_user!
-  layout "mission_index", :only => :index
   
   def index
     @q = @user.missions.ransack(params[:q])
     @missions = @q.result.page(params[:page]).per(5)
     @tags = Tag.joins(:missions).where("missions.user_id = ?", @user ).distinct()
+    render layout: 'mission_index'
   end
   
   def show
     @q = @user.missions.ransack(params[:q])
-    @mission = @user.missions.find(params[:id])
+    @mission = @user.missions.find( params[:id])
   end
 
   def new
@@ -56,10 +56,10 @@ class MissionsController < ApplicationController
   end
 
   def find_mission
-    @mission = Mission.find(params[:id])
+    @mission = Mission.find( params[:id])
   end
 
   def find_user
-    @user = User.find(params[:user_id])
+    @user = User.find( params[:user_id])
   end
 end

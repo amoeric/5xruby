@@ -255,10 +255,10 @@ feature "任務管理系統" do
     expect(mission.priority).to eq enum_mission(value: priority)
   end
 
-  def create_mission(title: , content: , start_time: , end_time: , status: , priority: , tag: 0)
+  def create_mission(title: , content: , start_time: , end_time: , status: , priority: , tag: nil)
     click_on "新增任務"
     expect(page).to have_content "任務列表"
-    if tag != 0
+    if tag
       click_on "新增標籤"
       within "#new_tag" do
         fill_in "tag[category]", with: tag

@@ -8,23 +8,19 @@
 </nav>
 
 <div class="user-new">
-  <%= form_for @user, controller: 'users', action: 'create' do |form| %>
+  <%= simple_form_for @user do |form| %>
     <%= render 'shared/errors', user: @user %>
     <div class="field">
-      <%= form.label :email %>
-      <%= form.text_field :email %>
+      <%= form.input :email %>
     </div>
     
     <div class="field">
-      <%= form.label :password %>
-      <%= form.password_field :password %>
+      <%= form.input :password %>
     </div>
     
     <div class="field">
-      <%= form.label :password_confirmation, t("message.again") %>
-      <%= form.password_field :password_confirmation %>
+      <%= form.input :password_confirmation %>
     </div>
-    
 
     <%= form.submit t("submit") %>
   <% end %>

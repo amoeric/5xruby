@@ -1,18 +1,17 @@
 .admin-wrap{
-  display: flex;
+  margin: 60px auto;
+  max-width: 1200px;
   .admin-page{
-    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
     height: 500px;
     background-color: #fff;
     color: black;
-    margin: auto;
-    display: flex;
-    text-align: center;
-    align-content: center;
-    flex-wrap: wrap;
     font-size: 30px;
-    .link{
+    text-align: center;
+    .link, h1{
       width: 100%;
     }
-  }
+  }  
 }

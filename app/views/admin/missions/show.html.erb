@@ -1,8 +1,16 @@
-<%= render 'admin/shared/nav' %>
 <div class="mission-show">
-  <div class="title"><%= t("mission.title") %>：</div><div class="txt"><%= @mission.title %></div>
-  <div class="title"><%= t("mission.content") %>：</div><div class="content"><%= @mission.content %></div>
-  <div class="title"><%= t("mission.start_time") %>：</div><div class="txt"><%= @mission.start_time %></div>
-  <div class="title"><%= t("mission.end_time") %>：</div><div class="txt"><%= @mission.end_time %></div>
-  <div class="title"><%= t("mission.status") %>：</div><div class="txt"><%= @mission.status %></div>
+  <div class="title"><%= t("mission.title") %></div><div class="txt"><%= @mission.title %></div>
+  <div class="title"><%= t("mission.content") %></div><div class="content"><%= @mission.content %></div>
+  <div class="title"><%= t("mission.start_time") %></div><div class="txt"><%= @mission.start_time %></div>
+  <div class="title"><%= t("mission.end_time") %></div><div class="txt"><%= @mission.end_time %></div>
+  <div class="title"><%= t("mission.status") %></div><div class="txt"><%= @mission.status %></div>
+  <div class="title"><%= t("tag.title") %></div>
+  <div class="tags">
+    <h5><%= t("tag.title") %></h5>
+    <% @mission.tags.each do |tag| %>
+      <div class="tag">
+        <%= tag.category %>
+      </div>
+    <% end %>
+  </div>
 </div>

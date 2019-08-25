@@ -34,15 +34,15 @@
     delete: 刪除任務
     home: 任務首頁
     detail: 細節
-    title: 名稱
-    content: 內容
-    start_time: 開始時間
-    end_time: 結束時間
+    title: '名稱：'
+    content: '內容：'
+    start_time: '開始時間：'
+    end_time: '結束時間：'
     empty: 沒有任務
-    status: 任務狀態
+    status: '任務狀態：'
     priority: 優先權
     search: 
-      status: 以任務狀態查詢：
+      status: '以任務狀態查詢：'
       status_btn: 狀態查詢
       option:
         status: 選擇狀態
@@ -55,7 +55,7 @@
       priority: 以優先權排序
   tag:
     new: 新增標籤
-    title: 標籤：
+    title: '標籤：'
     empty: 沒有標籤
     used: 有任務的標籤
   confirm:
@@ -79,6 +79,7 @@
     timerange: 結束日期不能比開始日期早哦！
     search_empty: 查無此結果
     again: 再輸入一次
+    not_self: 非本人
   enum:
     status:
       waiting: 待處理
