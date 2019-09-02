@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
+  include SessionHelper
   before_action :authenticate_user!, only: [:edit, :update]
-  before_action :find_user, except: [:index, :new, :create]
   layout "login", only: [:new]
   
   def show
@@ -14,9 +14,9 @@ class UsersController < ApplicationController
     @user = User.new(params_user)
     if @user.save
       login(@user)
-      redirect_to user_missions_path(@user), notice: I18n.t("notice.new_user_success")
+      redirect_to missions_path, notice: I18n.t("notice.new_user_success")
     else
-      render :new
+      render :new, layout: "login"
     end
   end
 
@@ -24,9 +24,9 @@ class UsersController < ApplicationController
   end
   
   def update
-    if @user.update(params_user)
-      login(@user)
-      redirect_to user_missions_path(@user), notice: I18n.t("notice.edit_user_success")
+    if current_user.update(params_user)
+      login(current_user)
+      redirect_to missions_path, notice: I18n.t("notice.edit_user_success")
     else
       render :edit
     end
@@ -34,10 +34,6 @@ class UsersController < ApplicationController
 
   private
   def params_user
-    params.require(:user).permit(:email, :role, :password, :password_confirmation)
-  end
-
-  def find_user
-    @user = User.find( params[:id])
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end
 end

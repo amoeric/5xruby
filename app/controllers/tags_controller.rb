@@ -1,10 +1,10 @@
 class TagsController < ApplicationController
-  before_action :find_user, only: :index
+  include SessionHelper
   before_action :find_tag, only: :destroy
   before_action :authenticate_user!
   
   def index
-    @q = @user.missions.ransack(params[:q])
+    @q = current_user.missions.ransack(params[:q])
     @tags = Tag.page(params[:page]).per(30)
   end
 
@@ -26,9 +26,9 @@ class TagsController < ApplicationController
   def destroy
     if @tag.destroy
       if params[:mission_id]
-        redirect_to user_mission_path(params[:user_id], params[:mission_id])
+        redirect_to mission_path(params[:mission_id])
       else
-        redirect_to user_tags_path(params[:user_id])
+        render 'missions/edit'
       end
     end
   end
@@ -36,10 +36,6 @@ class TagsController < ApplicationController
   private
   def tag_params
     params.require(:tag).permit(:category)
-  end
-
-  def find_user
-    @user = User.find( params[:user_id])
   end
 
   def find_tag
@@ -50,10 +46,10 @@ class TagsController < ApplicationController
     path = session_path.split('/')
     if path.last == 'edit'
       #mission-edit
-      redirect_to edit_user_mission_path(params[:user_id], path[4])
+      redirect_to edit_mission_path(path[2])
     else
       #mission-new
-      redirect_to new_user_mission_path(params[:user_id])
+      redirect_to new_mission_path
     end
   end
 end

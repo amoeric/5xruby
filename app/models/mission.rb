@@ -1,7 +1,6 @@
 class Mission < ApplicationRecord
-
-  validates :title, presence: true
   validate :end_time_better_start_time
+  validates :title, presence: true
   enum status: { waiting: 0, conduct: 1, finished: 2 }
   enum priority: { low: 0, medium: 1, hight: 2 }
   belongs_to :user

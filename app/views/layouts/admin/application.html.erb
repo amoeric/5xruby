@@ -11,7 +11,11 @@
 
   <body>
     <div class="admin-all-wrap">
-      <%= render 'admin/shared/nav' %>
+      <% if @q.nil?%>
+        <%= render 'admin/shared/nav' %>
+      <% else %>
+        <%= render 'admin/shared/mission_index_nav' %>
+      <% end %>
       <div class="admin-wrap">
         <%= yield %>
       </div>

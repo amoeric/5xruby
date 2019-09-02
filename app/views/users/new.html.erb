@@ -8,8 +8,7 @@
 </nav>
 
 <div class="user-new">
-  <%= simple_form_for @user do |form| %>
-    <%= render 'shared/errors', user: @user %>
+  <%= simple_form_for @user, method: :post, url: user_path  do |form| %>
     <div class="field">
       <%= form.input :email %>
     </div>

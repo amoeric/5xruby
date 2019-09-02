@@ -9,8 +9,8 @@
   </div>
   <div class="links">
     <h4><%= t("mission.expired") if check_end_time(mission.end_time) %></h4>
-    <%= link_to t("mission.check"), user_mission_path(@user, mission) %>
-    <%= link_to t("mission.edit"), edit_user_mission_path(@user, mission) %>
-    <%= link_to t("mission.delete"), user_mission_path(@user, mission), method:'DELETE', data: { confirm: t("confirm.delete") } %>
+    <%= link_to t("mission.check"), mission_path(mission) %>
+    <%= link_to t("mission.edit"), edit_mission_path( mission) %>
+    <%= link_to t("mission.delete"), mission_path( mission), method:'DELETE', data: { confirm: t("confirm.delete") } %>
   </div>
 </div>

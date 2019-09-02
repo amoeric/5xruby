@@ -1,6 +1,6 @@
 <div class="mission-new">
   <h1><%= t("mission.edit") %></h1>
   <%= render 'shared/errors', user: @mission %>
-  <%= link_to  t("tag.new"), new_user_tag_path(params[:user_id]) %>
+  <%= link_to  t("tag.new"), new_tag_path %>
   <%= render 'mission_form', mission: @mission %>
 </div>

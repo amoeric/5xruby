@@ -15,17 +15,11 @@ module SessionHelper
     end
   end
 
-  def only_current_user
-    params_user = request.path.split("/")[2].to_i
-    redirect_to user_missions_path(current_user), notice: I18n.t("message.not_self")  if params_user != current_user.id
-  end
-
   def user_sign_in?
-    redirect_to user_missions_path(current_user) if current_user
+    redirect_to missions_path if current_user
   end
 
   def authenticate_user!
     redirect_to root_path, notice: I18n.t("notice.login_first") if current_user.blank? 
-    only_current_user
   end
 end

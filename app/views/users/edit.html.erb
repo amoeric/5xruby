@@ -1,6 +1,6 @@
 <div class="user-new">
-  <%= form_for @user, controller: 'users', action: 'edit' do |form| %>
-    <%= render 'shared/errors', user: @user %>
+  <%= form_for current_user, controller: 'users', action: 'edit' do |form| %>
+    <%= render 'shared/errors', user: current_user %>
     <div class="field">
       <%= form.label :email %>
       <%= form.text_field :email %>

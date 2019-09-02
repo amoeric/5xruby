@@ -1,11 +1,11 @@
 Rails.application.routes.draw do
   root "sessions#new"
-  resources :users, except: [:index, :destroy] do
-    resources :tags, except: [:show, :edit, :update]
-    resources :missions do
-      resources :tags, except: [:index, :show, :edit, :update]
-    end
+  resource :user, except: [:index, :destroy]
+  resources :tags, except: [:show, :edit, :update]
+  resources :missions do
+    resources :tags, except: [:index, :show, :edit, :update]
   end
+  
 
   namespace :admin, path: "amoeric" do
     root 'pages#index'
@@ -20,7 +20,6 @@ Rails.application.routes.draw do
   post   '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  %w(404 500).each do |code|
-    get code, to: "errors#show", code: code
-  end
+  get    '/404', to: 'errors#not_found'
+  get    '/500', to: 'errors#internal_server_error'
 end
