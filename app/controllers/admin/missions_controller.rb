@@ -6,7 +6,7 @@ class Admin::MissionsController < Admin::PagesController
     if params[:user_id]
       find_user
       @q = @user.missions.ransack(params[:q])
-      @tags = Tag.joins(:missions).where("missions.user_id = ?", @user ).distinct()
+      @tags = Tag.joins(:missions).where(missions: {user_id: @user }).distinct()
     else
       @q = Mission.ransack(params[:q])
     end
@@ -61,9 +61,6 @@ class Admin::MissionsController < Admin::PagesController
   end
 
   def params_mission
-    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status, :priority )
-    result[:status] = params[:mission][:status].to_i
-    result[:priority] = params[:mission][:priority].to_i
-    result
+    params.require(:mission).permit(:title, :content, :start_time, :end_time, :status, :priority )
   end
 end

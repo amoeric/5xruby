@@ -44,7 +44,7 @@ gem 'ransack', '~> 2.1', '>= 2.1.1'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'faker', '~> 1.9', '>= 1.9.6'
 gem 'bcrypt', '~> 3.1', '>= 3.1.13'
-
+gem 'pg', '~> 1.1', '>= 1.1.4'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,11 +52,6 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
   gem 'faker', '~> 1.9', '>= 1.9.6'
   gem 'database_cleaner', '~> 1.7'
-  gem 'pg', '~> 1.1', '>= 1.1.4'
-end
-
-group :production do
-  gem 'pg', '~> 1.1', '>= 1.1.4'
 end
 
 group :development do

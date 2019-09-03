@@ -12,7 +12,7 @@ RSpec.describe User, type: :model do
       it "@沒字不給過" do
         user.email = "@example.com"
         user.valid?
-        expect(user.errors[:email]).to include "是無效的"
+        expect(user.errors[:email]).to include "無效的信箱"
       end
   
       it "@前面需一個字以上" do
@@ -25,19 +25,19 @@ RSpec.describe User, type: :model do
         #@後面需加.com
         user.email = "a1234567890@"
         user.valid?
-        expect(user.errors[:email]).to include "是無效的"
+        expect(user.errors[:email]).to include "無效的信箱"
       end
 
       it "@後面需加網站名" do
         user.email = "a1234567890@example"
         user.valid?
-        expect(user.errors[:email]).to include "是無效的"
+        expect(user.errors[:email]).to include "無效的信箱"
       end
 
       it "@後面網站後加上.com" do
         user.email = "a1234567890@example"
         user.valid?
-        expect(user.errors[:email]).to include "是無效的"
+        expect(user.errors[:email]).to include "無效的信箱"
       end
 
       it "合法範圍，給過" do
@@ -57,7 +57,7 @@ RSpec.describe User, type: :model do
         user.save
         user2 = build(:user)
         user2.valid?
-        expect(user2.errors.messages[:email]).to include "這帳號已經有人使用囉"
+        expect(user2.errors.messages[:email]).to include "已經被使用"
       end
     end
     

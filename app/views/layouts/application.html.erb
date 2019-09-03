@@ -11,7 +11,11 @@
 
   <body>
     <div class="wrap">
-      <%= render 'shared/nav' %>
+      <% if @q.nil? %>
+        <%= render 'shared/nav' %>
+      <% else %>
+        <%= render 'shared/mission_index_nav' %>
+      <% end %>
       <%= yield %>
     </div>
   </body>

@@ -1,18 +1,22 @@
 class MissionsController < ApplicationController
+  include SessionHelper
   before_action :find_mission, only: [:destroy, :update, :edit]
-  before_action :find_user, only: [:index, :show]
   before_action :authenticate_user!
   
   def index
-    @q = @user.missions.ransack(params[:q])
+    @q = current_user.missions.ransack(params[:q])
     @missions = @q.result.page(params[:page]).per(5)
-    @tags = Tag.joins(:missions).where("missions.user_id = ?", @user ).distinct()
-    render layout: 'mission_index'
+    @tags = Tag.joins(:missions).where(missions: {user_id: current_user }).distinct()
   end
   
   def show
-    @q = @user.missions.ransack(params[:q])
-    @mission = @user.missions.find( params[:id])
+    @q = current_user.missions.ransack(params[:q])
+    
+    begin 
+      @mission = current_user.missions.includes(:tags).find( params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render 'errors/404', layout: 'errors', status: 404
+    end
   end
 
   def new
@@ -20,9 +24,9 @@ class MissionsController < ApplicationController
   end
 
   def create
-    @mission = Mission.new(params_mission)
+    @mission = current_user.missions.new(params_mission)
     if @mission.save
-      redirect_to user_missions_path(params[:user_id]), notice: I18n.t("notice.new_mission_success")
+      redirect_to missions_path, notice: I18n.t("notice.new_mission_success")
     else
       render :new
     end
@@ -33,7 +37,7 @@ class MissionsController < ApplicationController
 
   def update
     if @mission.update(params_mission)
-      redirect_to user_missions_path(params[:user_id]), notice: I18n.t("notice.edit_mission_success")
+      redirect_to missions_path, notice: I18n.t("notice.edit_mission_success")
     else
       render :edit
     end
@@ -41,7 +45,7 @@ class MissionsController < ApplicationController
 
   def destroy
     if @mission.destroy
-      redirect_to user_missions_path(params[:user_id]), notice: I18n.t("notice.delete_mission_success")
+      redirect_to missions_path, notice: I18n.t("notice.delete_mission_success")
     else
       render :index
     end
@@ -49,17 +53,14 @@ class MissionsController < ApplicationController
 
   private
   def params_mission
-    result = params.require(:mission).permit(:title, :content, :user_id, :start_time, :end_time, :status, :priority, tag_ids: [] )
-    result[:status] = params[:mission][:status].to_i
-    result[:priority] = params[:mission][:priority].to_i
-    result
+    params.require(:mission).permit(:title, :content, :start_time, :end_time, :status, :priority, tag_ids: [] )
   end
 
   def find_mission
-    @mission = Mission.find( params[:id])
-  end
-
-  def find_user
-    @user = User.find( params[:user_id])
+    begin 
+      @mission = current_user.missions.find( params[:id])
+    rescue ActiveRecord::RecordNotFound
+      render 'errors/404', layout: 'errors', status: 404
+    end
   end
 end

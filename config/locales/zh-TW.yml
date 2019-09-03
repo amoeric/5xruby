@@ -79,7 +79,8 @@
     timerange: 結束日期不能比開始日期早哦！
     search_empty: 查無此結果
     again: 再輸入一次
-    not_self: 非本人
+    not_self: 不是你創建的任務哦
+    email_invalid: 無效的信箱
   enum:
     status:
       waiting: 待處理

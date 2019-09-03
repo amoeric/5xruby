@@ -1,13 +1,12 @@
 <nav class="top-list">
   <div class="nav-list-left">
-    <%= link_to  t("nav.mission_list"), user_missions_path %>
-    <%= link_to  t("nav.tag_list"), user_tags_path(current_user) %>
+    <%= link_to  t("nav.mission_list"), missions_path %>
   </div>
   <div class="nav-list-middle">
     <%= render 'shared/searchform' %>
   </div>
   <div class="nav-list-right">
-    <%= link_to  t("nav.new_mission"), new_user_mission_path(current_user) %>
+    <%= link_to  t("nav.new_mission"), new_mission_path %>
     <ul class="nav-list-ul">
       <%= "Hi,#{current_user.email}▿" %>
       <li><%= link_to t("user.profile"), user_path(current_user) %></li>
