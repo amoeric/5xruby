@@ -1,10 +1,9 @@
 class User < ApplicationRecord
   has_secure_password
   validates :password, length: { in: 6..15 }
-  validates :email, uniqueness: true
-  validates :email, format: { with: /\w+@((\w+\w{2,}\.)\w{2,3})/,
+  validates :email, uniqueness: true, format: { with: /\w+@((\w+\w{2,}\.)\w{2,3})/,
                               message: I18n.t("message.email_invalid") }
-                              
+
   has_many :missions, dependent: :destroy
   enum role: { user: 0, admin: 1 }
   before_destroy :admin_must_has_one
