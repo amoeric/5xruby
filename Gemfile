@@ -45,6 +45,8 @@ gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'faker', '~> 1.9', '>= 1.9.6'
 gem 'bcrypt', '~> 3.1', '>= 3.1.13'
 gem 'pg', '~> 1.1', '>= 1.1.4'
+gem 'carrierwave', '~> 2.0', '>= 2.0.1'
+gem 'mini_magick', '~> 4.9', '>= 4.9.3'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,21 +1,21 @@
 <div class="user-new">
-  <%= form_for current_user, controller: 'users', action: 'edit' do |form| %>
+  <%= simple_form_for current_user, controller: 'users', action: 'edit' do |form| %>
     <%= render 'shared/errors', user: current_user %>
     <div class="field">
-      <%= form.label :email %>
-      <%= form.text_field :email %>
+      <%= form.input :email %>
     </div>
     
     <div class="field">
-      <%= form.label :password %>
-      <%= form.password_field :password %>
+      <%= form.input :password %>
     </div>
     
     <div class="field">
-      <%= form.label :password_confirmation, t("message.again") %>
-      <%= form.password_field :password_confirmation %>
+      <%= form.input :password_confirmation %>
     </div>
-    
+
+    <div class="field">
+      <%= form.input :avatar, label: '頭貼' %>
+    </div>
     <%= form.submit t("submit") %>
   <% end %>
 </div>
