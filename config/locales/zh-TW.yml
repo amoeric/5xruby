@@ -44,9 +44,14 @@
     search: 
       status: '以任務狀態查詢：'
       status_btn: 狀態查詢
+      mission_expired:
+          overtime: 結束時間
+          over: 已過期
+          notyet: 未過期
       option:
         status: 選擇狀態
         priority: 選擇優先權
+        
     expired: 任務已過期
     search_btn: 查詢
     sort: 

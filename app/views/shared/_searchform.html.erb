@@ -15,5 +15,11 @@
       [ t("enum.priority.hight"), 2]
     ]) %>
 
+    <%= f.select :mission_expired, options_for_select([
+    [ t("mission.search.mission_expired.overtime"), "" ],
+    [ t("mission.search.mission_expired.over"), "over"],
+    [ t("mission.search.mission_expired.notyet"), "notyet"]
+  ]) %>
+
   <%= f.submit t("mission.search_btn"), class: "btn btn-primary" %>
 <% end %>

@@ -7,7 +7,8 @@ class User < ApplicationRecord
   has_many :missions, dependent: :destroy
   enum role: { user: 0, admin: 1 }
   before_destroy :admin_must_has_one
-
+  mount_uploader :avatar, AvatarUploader
+  
   private
   def admin_must_has_one
     # if "比對刪除的是否是管理員，再去判斷是否勝一個"
