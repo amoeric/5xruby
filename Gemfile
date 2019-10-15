@@ -37,9 +37,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'simple_form'
 gem 'rails-i18n', '~> 5.1', '>= 5.1.3'
-gem 'bootstrap-sass', '~> 3.4.1'
-gem 'bootstrap-datepicker-rails', '~> 1.8', '>= 1.8.0.1'
-gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
 gem 'ransack', '~> 2.1', '>= 2.1.1'
 gem 'kaminari', '~> 1.1', '>= 1.1.1'
 gem 'faker', '~> 1.9', '>= 1.9.6'
@@ -49,6 +46,15 @@ gem 'carrierwave', '~> 2.0', '>= 2.0.1'
 gem 'mini_magick', '~> 4.9', '>= 4.9.3'
 gem 'fog-aws', '~> 3.5', '>= 3.5.1'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'twsms2', '~> 1.2.0'
+gem 'redcarpet'
+gem 'coderay'
+
+gem 'bootstrap', '~> 4.0.0'
+gem 'bootstrap-datepicker-rails', '~> 1.8', '>= 1.8.0.1'
+gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
+
+gem 'font-awesome-sass', '~> 5.11', '>= 5.11.2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

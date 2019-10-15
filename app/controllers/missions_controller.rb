@@ -37,7 +37,7 @@ class MissionsController < ApplicationController
 
   def update
     if @mission.update(params_mission)
-      redirect_to missions_path, notice: I18n.t("notice.edit_mission_success")
+      redirect_to edit_mission_path(params[:id]), notice: I18n.t("notice.edit_mission_success")
     else
       render :edit
     end

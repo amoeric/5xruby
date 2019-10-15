@@ -13,10 +13,10 @@
  *= require_tree .
  *= require_self
  */
- @import 'bootstrap-sprockets'; // 這行一定要在 "bootstrap 前面
  @import 'bootstrap';
+ @import "font-awesome-sprockets";
+ @import "font-awesome";
  
-
  body{
   background-color: #03324D; 
  }

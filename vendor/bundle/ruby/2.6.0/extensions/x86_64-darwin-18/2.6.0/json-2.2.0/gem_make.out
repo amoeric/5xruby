@@ -1,0 +1,13 @@
+current directory: /Users/eric/Desktop/5xruby/ruby/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+/Users/eric/.rvm/rubies/ruby-2.6.0/bin/ruby -I /Users/eric/.rvm/rubies/ruby-2.6.0/lib/ruby/2.6.0 -r ./siteconf20191009-33759-w0cdad.rb extconf.rb
+creating Makefile
+
+current directory: /Users/eric/Desktop/5xruby/ruby/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR=" clean
+
+current directory: /Users/eric/Desktop/5xruby/ruby/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+current directory: /Users/eric/Desktop/5xruby/ruby/vendor/bundle/ruby/2.6.0/gems/json-2.2.0/ext/json
+make "DESTDIR=" install
