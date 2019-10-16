@@ -55,6 +55,7 @@ gem 'bootstrap-datepicker-rails', '~> 1.8', '>= 1.8.0.1'
 gem 'jquery-rails', '~> 4.1', '>= 4.1.1'
 
 gem 'font-awesome-sass', '~> 5.11', '>= 5.11.2'
+gem 'react-rails', '~> 1.7', '>= 1.7.1'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
