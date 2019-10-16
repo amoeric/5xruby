@@ -1,10 +1,26 @@
-<div class="mission-show">
-  <div class="title"><%= t("mission.title") %></div><div class="txt"><%= @mission.title %></div>
-  <div class="title"><%= t("mission.content") %></div><div class="content"><%= @mission.content %></div>
-  <div class="title"><%= t("mission.start_time") %></div><div class="txt"><%= @mission.start_time %></div>
-  <div class="title"><%= t("mission.end_time") %></div><div class="txt"><%= @mission.end_time %></div>
-  <div class="title"><%= t("mission.status") %></div><div class="txt"><%= @mission.status %></div>
-  <div class="tags">
+<div class="mission-show card">
+  <div class="pl-2 title">
+    <div class="row justify-content-around">
+      <div class="col-6"><%= @mission.title %></div>
+      <div class="col-6">
+        <%= link_to edit_mission_path(@mission) do %>
+          <i class="far fa-edit font-size-20"></i>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container">
+    <div class="row justifiy-items-center align-items-center">
+      <div class="col-12 p-5 mb-1"><%= markdown(@mission.content).html_safe %></div>
+    </div>
+  </div>
+
+  <div class="card bg-dark text-white p-5 mb-1"><%= t("mission.start_time") %><%= @mission.start_time %></div>
+  <div class="card bg-dark text-white p-5 mb-1"><%= t("mission.end_time") %><%= @mission.end_time %></div>
+  <div class="card bg-dark text-white p-5 mb-1"><%= t("mission.status") %><%= @mission.status %></div>
+  
+  <div class="tags card bg-dark text-white mb-1">
     <h5><%= t("tag.title") %></h5>
     <% @mission.tags.each do |tag| %>
       <%= search_form_for @q, url: missions_path, id: "index-tag" do |f| %>
@@ -14,5 +30,4 @@
       <%= link_to  "X", mission_tag_path(@mission, tag), method: 'delete', class: 'tag-delete', data: { confirm: t("confirm.delete") } %>
     <% end %>
   </div>
-  <%= link_to t("mission.edit"), edit_mission_path(@mission) %>
 </div>

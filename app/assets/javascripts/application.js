@@ -14,6 +14,6 @@
 //= require activestorage
 //= require turbolinks
 //= require nav
-
-//= require jquery
+//= require jquery3
+//= require popper
 //= require bootstrap-sprockets

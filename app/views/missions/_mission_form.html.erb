@@ -1,10 +1,21 @@
-<%= simple_form_for [mission] do |mission| %>
-  <%= mission.collection_check_boxes :tag_ids, Tag.all, :id, :category %>
-  <%= mission.input :title %>
-  <%= mission.input :content %>
-  <%= mission.input :start_time %>
-  <%= mission.input :end_time %>
-  <%= mission.input :status, as: :radio_buttons, collection: [["waiting", t("enum.status.waiting")], ["conduct", t("enum.status.conduct")], ["finished", t("enum.status.finished")]], label_method: :second, value_method: :first, checked: ["waiting"] %>
-  <%= mission.input :priority, as: :radio_buttons, collection: [[ "low", t("enum.priority.low")], [ "medium", t("enum.priority.medium")], [ "hight", t("enum.priority.hight")]], label_method: :second, value_method: :first, checked: ["low"] %>
-  <%= mission.submit t("submit") %>
-<% end %>
+<div class="row">
+  <div class="col-12">
+    <%= simple_form_for [mission] do |mission| %>
+      <%= mission.collection_check_boxes :tag_ids, Tag.all, :id, :category %>
+      <div class="">
+        <%= mission.input :title, label: false %>
+        <%= mission.input :content, label: false %>
+      </div>
+      <div class="collapse multi-collapse" id="multiCollapseExample1">
+        <div class="card card-body mission-content">
+          <%= mission.input :start_time %>
+          <%= mission.input :end_time %>
+          <%= mission.input :status, as: :radio_buttons, collection: [["waiting", t("enum.status.waiting")], ["conduct", t("enum.status.conduct")], ["finished", t("enum.status.finished")]], label_method: :second, value_method: :first, checked: ["waiting"] %>
+          <%= mission.input :priority, as: :radio_buttons, collection: [[ "low", t("enum.priority.low")], [ "medium", t("enum.priority.medium")], [ "hight", t("enum.priority.hight")]], label_method: :second, value_method: :first, checked: ["low"] %>
+        </div>
+      </div>
+      <%= mission.submit t("submit"), class: "btn btn-primary m-auto" %>
+      <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">其他設定</a>
+    <% end %>
+  </div>
+</div>

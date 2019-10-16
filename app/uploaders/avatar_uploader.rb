@@ -1,11 +1,11 @@
 class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
-  if Rails.env.production?      #production的時候改為上傳至sw3
-    storage :fog
-  else
-    storage :file
-  end
+  # if Rails.env.production?      #production的時候改為上傳至sw3
+  #   storage :fog
+  # else
+  # end
+  storage :file
 
   process resize_to_fill: [200,200]
   

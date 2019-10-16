@@ -1,6 +1,13 @@
-<div class="mission-new">
-  <h1><%= t("mission.edit") %></h1>
-  <%= render 'shared/errors', user: @mission %>
-  <%= link_to  t("tag.new"), new_tag_path %>
-  <%= render 'mission_form', mission: @mission %>
+<div class="container-fluid"></div>
+  <div class="row p-5 mt-3">
+    <div class="col-5 card height-vh100 scroll">
+      <%= render 'shared/errors', user: @mission %>
+      <%= link_to  t("tag.new"), new_tag_path %>
+      <%= render 'mission_form', mission: @mission %>
+    </div>
+    <div class="col-6 card m-auto p-5 height-vh100 scroll">
+      <%= markdown(@mission.title).html_safe %>
+      <%= markdown(@mission.content).html_safe %>
+    </div>
+  </div>
 </div>
