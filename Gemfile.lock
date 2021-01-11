@@ -251,7 +251,7 @@ GEM
       execjs
       railties (>= 3.2)
       tilt
-    redcarpet (2.3.0)
+    redcarpet (3.5.1)
     regexp_parser (1.5.1)
     rspec-core (3.8.0)
       rspec-support (~> 3.8.0)
